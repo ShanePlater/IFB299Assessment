@@ -89,7 +89,7 @@ namespace ASPNet.Core.Models
                     Username = $"student_{i}",
                     FirstName = $"student_first {i}",
                     LastName = $"student_last {i}",
-                    Email = $"student{i}@abc.com"
+                    Email = $"student_{i}@abc.com"
                 };
                 students.Add(student);
             }
