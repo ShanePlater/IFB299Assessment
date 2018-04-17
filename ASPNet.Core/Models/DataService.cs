@@ -23,9 +23,9 @@ namespace ASPNet.Core.Models
             {
                 var student = new Student()
                 {
-                    Username = $"student {i}",
-                    FirstName = $"student first {i}",
-                    LastName = $"student last {i}",
+                    Username = $"student_{i}",
+                    FirstName = $"student_first {i}",
+                    LastName = $"student_last {i}",
                     Email = $"student{i}@abc.com"
                 };
                 students.Add(student);
@@ -44,10 +44,10 @@ namespace ASPNet.Core.Models
             {
                 var teacher = new Teacher()
                 {
-                    Username = $"a{i}",
-                    FirstName = $"aa{i}",
-                    LastName = $"bb{i}",
-                    Email = $"aa{i}@abc.com"
+                    Username = $"teacher_{i}",
+                    FirstName = $"teacher_first {i}",
+                    LastName = $"teacher_last {i}",
+                    Email = $"teacher_{i}@abc.com"
                 };
                 teachers.Add(teacher);
             }
