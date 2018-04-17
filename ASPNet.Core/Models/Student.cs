@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ASPNet.Core.Models
 {
-    public class Student
+    public class Student : User
     {
     }
 }

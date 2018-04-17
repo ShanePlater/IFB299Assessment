@@ -1,6 +1,6 @@
 ﻿namespace ASPNet.Core.Models
 {
-    public class Teacher
+    public class Teacher : User
     {
     }
 }
