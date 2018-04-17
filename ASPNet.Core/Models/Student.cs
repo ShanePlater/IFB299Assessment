@@ -7,5 +7,6 @@ namespace ASPNet.Core.Models
 {
     public class Student : User
     {
+
     }
 }
