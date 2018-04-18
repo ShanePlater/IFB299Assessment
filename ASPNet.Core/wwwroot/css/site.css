@@ -33,3 +33,15 @@
         display: none;
     }
 }
+
+.carousel-caption {
+    top: 10%;
+    right:-30%;
+}
+
+.form-signin{
+    margin:10px auto;
+    width:100%;
+    max-width:330px;
+}
+
