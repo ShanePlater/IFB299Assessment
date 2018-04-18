@@ -1,13 +1,13 @@
 ﻿body {
     padding-top: 50px;
-    padding-bottom: 20px;
+    padding-bottom: 0px;
 }
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 /* Carousel */
@@ -45,3 +45,79 @@
     max-width:330px;
 }
 
+/* footer */
+$primary-light-blue: #8DB9ED; 
+$primary-line-color: #ccc; 
+* {
+    box-sizing: border-box
+}
+
+html, body {
+    height: 100%
+}
+
+body {
+    font: 11px "Open Sans", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: auto;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between
+}
+
+
+.generic-anchor {
+    color: $primary-light-blue;
+    text-align: left;
+}
+
+&:visited{
+    color: $primary-light-blue
+}
+
+&:hover {
+    color: $primary-line-color
+}
+
+
+.flex-rw {
+    display: flex;
+    flex-flow: row wrap
+}
+
+main {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: 10em "Oswald", sans-serif;
+    color: rgb(155,155,155);
+    line-height: 1
+}
+
+footer {
+    background: rgb(55,55,55);
+    margin-top: auto;
+    width: 100%
+}
+
+.footer-list-top {
+    width: 15%
+}
+
+.footer-list-top > li {
+        text-align: left;
+        padding-bottom: 5px
+}
+
+.footer-list-header {
+    padding: 5px 0 5px 0;
+    color: #fff;
+    font: 16px "Oswald", sans-serif
+}
+
+.footer-list-anchor {
+    font: 12px "Open Sans", sans-serif;
+    text-align: left;
+}
