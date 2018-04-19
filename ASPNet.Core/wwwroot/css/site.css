@@ -10,24 +10,22 @@
     padding-right: 25px;
 }
 
-/* Carousel */
+/* Carousel 
 .carousel-caption {
     font-size: 20px;
     line-height: 1.4;
     text-align: left;
 }
-
 .carousel-content {
     color: black;
     display: flex;
 }
-
 #text-carousel {
     width: 100%;
     height: auto;
     padding: 50px;
 }
-
+*/
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%
@@ -42,8 +40,7 @@
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
 
-/* Hide captions */
-
+/* Hide captions 
 .carousel-caption {
 display: none;
 }
@@ -52,6 +49,7 @@ display: none;
     top: 10%;
     right:0%;
 }
+*/
 
 .form-signin{
     margin:10px auto;
@@ -134,4 +132,8 @@ footer {
 .footer-list-anchor {
     font: 12px "Open Sans", sans-serif;
     text-align: left;
+}
+
+#test1 {
+    font: 100px;
 }
