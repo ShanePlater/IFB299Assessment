@@ -41,15 +41,16 @@
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+
+/* Hide captions */
+
+.carousel-caption {
+display: none;
 }
 
 .carousel-caption {
     top: 10%;
-    right:-30%;
+    right:0%;
 }
 
 .form-signin{
