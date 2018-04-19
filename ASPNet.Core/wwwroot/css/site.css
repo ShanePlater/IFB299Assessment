@@ -1,68 +1,79 @@
 ﻿body {
     padding-top: 50px;
-    padding-bottom: 0px;
+    padding-bottom: 0px
 }
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
     padding-left: 25px;
-    padding-right: 25px;
+    padding-right: 25px
 }
 
-/* Carousel */
+/* Carousel Header Mainpage*/
 
 .carousel-caption {
-    font-size: 20px;
+    top: 10%;
+    align-items: flex-start;
+    font-family: "Arial Black", Gadget, sans-serif
+}
+
+.form-signin {
+    margin: 10px auto;
+    width: 100%;
+    max-width: 330px
+}
+.carousel-caption p {
+    font-size: 25px;
     line-height: 1.4;
-    text-align: left;
+    text-align: center
+}
+
+.carousel-caption h2 {
+    font-size: 30px;
+    line-height: 1.4;
+    text-align: center
+}
+/* Carousel Testimony Mainpage*/
+#carousel-testimony {
+    height: 150px;
 }
 .carousel-content {
-    color: black;
-    display: flex;
+    font-size: 16px;
+    line-height: 1.4;
+    text-align: center;
+    padding-top: 15px
 }
-#text-carousel {
-    width: 100%;
-    height: auto;
-    padding: 50px;
+
+.carousel-author {
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 25px;
+    line-height: 2;
+    text-align: center
 }
+
 
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%
-
 }
 
 /* QR code generator */
 #qrCode {
-    margin: 15px;
+    margin: 15px
 }
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
-
-/* Hide captions */
-
-.carousel-caption {
-display: none;
+    /* Hide captions */
+    .carousel-caption {
+        display: none
+    }
 }
 
-.carousel-caption {
-    top: 10%;
-    right:0%;
-}
-
-
-.form-signin{
-    margin:10px auto;
-    width:100%;
-    max-width:330px;
-}
 
 /* footer */
-$primary-light-blue: #8DB9ED; 
-$primary-line-color: #ccc; 
-* {
+$primary-light-blue: #8DB9ED; $primary-line-color: #ccc; * {
     box-sizing: border-box
 }
 
@@ -83,10 +94,10 @@ body {
 
 .generic-anchor {
     color: $primary-light-blue;
-    text-align: left;
+    text-align: left
 }
 
-&:visited{
+&:visited {
     color: $primary-light-blue
 }
 
@@ -120,10 +131,10 @@ footer {
     width: 15%
 }
 
-.footer-list-top > li {
+    .footer-list-top > li {
         text-align: left;
         padding-bottom: 5px
-}
+    }
 
 .footer-list-header {
     padding: 5px 0 5px 0;
@@ -133,9 +144,4 @@ footer {
 
 .footer-list-anchor {
     font: 12px "Open Sans", sans-serif;
-    text-align: left;
-}
-
-#test123 {
-    font: 100px;
-}
+    text-align: left
