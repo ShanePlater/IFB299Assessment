@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
-    padding-bottom: 0px
+    padding-bottom: 0px;
+    background-color: #EBEAE7;
 }
 
 /* Wrapping element */
@@ -10,12 +11,16 @@
     padding-right: 25px
 }
 
+h1 {
+    font-family: "Arial Black", Gadget, sans-serif;
+    font-size: 30px;
+}
 /* Carousel Header Mainpage*/
-
 .carousel-caption {
     top: 10%;
     align-items: flex-start;
-    font-family: "Arial Black", Gadget, sans-serif
+    font-family: "Arial Black", Gadget, sans-serif;
+    vertical-align: central;
 }
 
 .form-signin {
@@ -30,32 +35,49 @@
 }
 
 .carousel-caption h2 {
-    font-size: 30px;
+    font-size: 28px;
     line-height: 1.4;
     text-align: center
 }
 /* Carousel Testimony Mainpage*/
+
 #carousel-testimony {
-    height: 150px;
+    height: 300px;
+    width: 100%;
 }
 .carousel-content {
     font-size: 16px;
     line-height: 1.4;
     text-align: center;
-    padding-top: 15px
+    color: #262626;
+    padding-top: 5em;
 }
 
 .carousel-author {
     font-family: "Arial Black", Gadget, sans-serif;
     font-size: 25px;
     line-height: 2;
-    text-align: center
+    text-align: center;
+    color: #262626;
+}
+
+.banner-img {
+    height: 25px;
+    width: 100%;
+    position: relative;
+}
+
+.carousel-inner {
+    height: 400px;
+    width: 100%;
+    position: relative;
 }
 
 
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%
+
 }
 
 /* QR code generator */
