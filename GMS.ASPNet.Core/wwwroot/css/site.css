@@ -31,9 +31,9 @@ padding-bottom:10%;
     list-style: none;
 }
 
-$primary-light-blue: #8DB9ED; $primary-line-color: #ccc; * {
+/*$primary-light-blue: #8DB9ED; $primary-line-color: #ccc; * {
     box-sizing: border-box
-}
+}*/
 
 .generic-anchor {
     color: $primary-light-blue;

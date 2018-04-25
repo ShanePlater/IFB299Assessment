@@ -83,7 +83,6 @@ namespace GMS.Data
             {
                 var student = new Student()
                 {
-                    Username = $"student_{i}",
                     FirstName = $"student_first {i}",
                     LastName = $"student_last {i}",
                     Email = $"student_{i}@abc.com"
@@ -104,7 +103,7 @@ namespace GMS.Data
             {
                 var teacher = new Teacher()
                 {
-                    Username = $"teacher_{i}",
+                    UserName = $"teacher_{i}",
                     FirstName = $"teacher_first {i}",
                     LastName = $"teacher_last {i}",
                     Email = $"teacher_{i}@abc.com"

@@ -1,19 +1,28 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace GMS.Data.Models
 {
     public class Lesson
     {
-        public Teacher teacher;
+        [Key]
+        public Teacher Teacher { get; set; }
 
-        public Student student;
+        [Key]
+        public Student Student { get; set; }
 
-        public DateTime dateTime;
+        [Key]
+        public DateTime DateTime { get; set; }
 
-        public int Cost;
+        public Instrument Instrument { get; set; }
 
-        public enum LessonStatus { Complete, Cancelled, Missed };
+        public string LessonType { get; set; }
 
-        public LessonStatus Status;
+        public int Cost { get; set; }
+
+        public enum LessonStatus { Complete, Cancelled, Missed, Postponed };
+
+        public LessonStatus Status { get; set; }
     }
 }

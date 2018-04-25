@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.ASPNet.Core", "GMS.ASPN
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Data", "GMS.Data\GMS.Data.csproj", "{897FD640-1028-43FC-943A-4B6A4B7EEDBD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{92348536-FD9B-4CC5-89A4-7D4C3D7F45DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{897FD640-1028-43FC-943A-4B6A4B7EEDBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{897FD640-1028-43FC-943A-4B6A4B7EEDBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{897FD640-1028-43FC-943A-4B6A4B7EEDBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92348536-FD9B-4CC5-89A4-7D4C3D7F45DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92348536-FD9B-4CC5-89A4-7D4C3D7F45DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92348536-FD9B-4CC5-89A4-7D4C3D7F45DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92348536-FD9B-4CC5-89A4-7D4C3D7F45DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
