@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.ASPNet.Core", "GMS.ASPNet.Core\GMS.ASPNet.Core.csproj", "{0B4173F9-22ED-4849-8D35-562B047BBDB7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{897FD640-1028-43FC-943A-4B6A4B7EEDBD} = {897FD640-1028-43FC-943A-4B6A4B7EEDBD}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GMS.Data", "GMS.Data\GMS.Data.csproj", "{897FD640-1028-43FC-943A-4B6A4B7EEDBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B4173F9-22ED-4849-8D35-562B047BBDB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B4173F9-22ED-4849-8D35-562B047BBDB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B4173F9-22ED-4849-8D35-562B047BBDB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B4173F9-22ED-4849-8D35-562B047BBDB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{897FD640-1028-43FC-943A-4B6A4B7EEDBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{897FD640-1028-43FC-943A-4B6A4B7EEDBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{897FD640-1028-43FC-943A-4B6A4B7EEDBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{897FD640-1028-43FC-943A-4B6A4B7EEDBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E4DE05E8-BEE9-4381-9C16-3B79B938C30A}
+	EndGlobalSection
+EndGlobal

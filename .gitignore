@@ -1,7 +1,4 @@
-
-ASPNet/bin/*
-ASPNet/obj/*
-ASPNet.Core/obj/*
-ASPNet.Core/bin/*
-packages/*
-.vs/
+**/obj/**
+**/bin/**
+packages/**
+.vs/**
