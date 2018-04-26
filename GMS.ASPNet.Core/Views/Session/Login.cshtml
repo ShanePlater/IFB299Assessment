@@ -1,13 +1,8 @@
-﻿@using System.Collections.Generic
-@using System.Linq
-@using GMS.ASPNet.Core.Models.AccountViewModels
-@using GMS.Data.Models
-@using Microsoft.AspNetCore.Http
-@using Microsoft.AspNetCore.Http.Authentication
+﻿@using GMS.Data.Models
 @using Microsoft.AspNetCore.Identity
 
-@model GMS.ASPNet.Core.Models.AccountViewModels.LoginViewModel
-@inject SignInManager<User> SignInManager
+@model GMS.ASPNet.Core.Models.SessionViewModels.LoginViewModel
+@inject SignInManager<AppUser> SignInManager
 
 @{
     ViewData["Title"] = "Log in";

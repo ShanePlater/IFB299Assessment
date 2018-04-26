@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace GMS.ASPNet.Core.Models.AccountViewModels
+namespace GMS.ASPNet.Core.Models.SessionViewModels
 {
     public class RegisterViewModel
     {

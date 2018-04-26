@@ -1,6 +1,4 @@
-﻿@using GMS.ASPNet.Core.Models.AccountViewModels
-
-@model GMS.ASPNet.Core.Models.AccountViewModels.RegisterViewModel
+﻿@model GMS.ASPNet.Core.Models.SessionViewModels.RegisterViewModel
 @{
     ViewData["Title"] = "Register";
 }
@@ -8,7 +6,7 @@
 <h2>@ViewData["Title"]</h2>
 
 
-        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" class="form-signin">
             <h4>Create a new account.</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ASPNet.Core.Models.Student>
+﻿@model IEnumerable<GMS.Data.Models.Student>
 
 @{
     
@@ -12,12 +12,12 @@
         <tr>
             <th></th>
         </tr>
-    </thead>
+     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Username)
+                @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)

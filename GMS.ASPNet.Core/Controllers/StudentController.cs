@@ -7,8 +7,7 @@ namespace GMS.ASPNet.Core.Controllers
     {
         public IActionResult List()
         {
-            var dataService = new DataService();
-            return View(dataService.getStudents());
+            return View();
         }
     }
 }

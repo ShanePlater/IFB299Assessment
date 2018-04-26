@@ -1,5 +1,4 @@
 ﻿using System;
-using GMS.ASPNet.Core.Services;
 using GMS.Data;
 using GMS.Data.Models;
 using Microsoft.AspNetCore.Builder;
@@ -26,14 +25,16 @@ namespace GMS.ASPNet.Core
             services.AddDbContext<DataContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("MySQLConnection")));
 
-            services.AddIdentity<User, IdentityRole<Guid>>().AddEntityFrameworkStores<DataContext>()
+            services.AddIdentity<AppUser, IdentityRole<Guid>>().AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
+
+            
 
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings
                 options.Password.RequireDigit = true;
-                options.Password.RequiredLength = 8;
+                options.Password.RequiredLength = 6;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = true;
                 options.Password.RequireLowercase = false;
@@ -53,16 +54,11 @@ namespace GMS.ASPNet.Core
                 // Cookie settings
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-                // If the LoginPath isn't set, ASP.NET Core defaults 
-                // the path to /Account/Login.
-                options.LoginPath = "/Account/Login";
-                // If the AccessDeniedPath isn't set, ASP.NET Core defaults 
-                // the path to /Account/AccessDenied.
-                options.AccessDeniedPath = "/Account/AccessDenied";
+                options.LoginPath = "/Session/Login";
+                options.AccessDeniedPath = "/Session/AccessDenied";
                 options.SlidingExpiration = true;
             });
 
-            services.AddTransient<IEmailSender, EmailSender>();
             services.AddMvc();
         }
 

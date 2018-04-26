@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Text;
 using GMS.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -9,12 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GMS.Data
 {
-    public class DataContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
+    public class DataContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
         }
+
+        public DbSet<Availability> Availabilities { get; set; }
 
         public DbSet<Student> Students { get; set; }
 
@@ -32,6 +31,13 @@ namespace GMS.Data
             modelBuilder.Entity<Teacher>().ToTable("Teacher");
             modelBuilder.Entity<Lesson>().ToTable("Lesson");
             modelBuilder.Entity<Instrument>().ToTable("Instrument");
+            modelBuilder.Entity<Availability>().ToTable("Availability");
+
+            modelBuilder.Entity<Availability>()
+                .HasKey(c => new { c.TeacherId, c.DateTime });
+
+            modelBuilder.Entity<Lesson>()
+                .HasKey(c => new { c.TeacherId, c.StudentId, c.DateTime });
 
         }
     }

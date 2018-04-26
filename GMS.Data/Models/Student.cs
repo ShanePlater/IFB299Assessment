@@ -1,6 +1,6 @@
 ﻿namespace GMS.Data.Models
 {
-    public class Student : User
+    public class Student : AppUser
     {
 
     }

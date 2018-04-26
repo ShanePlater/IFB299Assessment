@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace GMS.Data.Models
 {
-    public class User : IdentityUser<Guid>
+    public class AppUser : IdentityUser<Guid>
     {
         public string FirstName { get; set; }
 

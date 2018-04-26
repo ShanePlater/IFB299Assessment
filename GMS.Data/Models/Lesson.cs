@@ -1,21 +1,24 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace GMS.Data.Models
 {
     public class Lesson
     {
-        public Guid LessonId { get; set; }
+        public Guid TeacherId { get; set; }
 
         [Required]
         public Teacher Teacher { get; set; }
+
+        public Guid StudentId { get; set; }
 
         [Required]
         public Student Student { get; set; }
 
         [Required]
         public DateTime DateTime { get; set; }
+
+        public Guid InstrumentID { get; set; }
 
         public Instrument Instrument { get; set; }
 

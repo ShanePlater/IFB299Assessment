@@ -13,9 +13,10 @@ using System;
 namespace GMS.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180426065315_Availabilities")]
+    partial class Availabilities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,7 +95,7 @@ namespace GMS.Data.Migrations
 
             modelBuilder.Entity("GMS.Data.Models.Instrument", b =>
                 {
-                    b.Property<Guid>("InstrumentID")
+                    b.Property<string>("InstrumentID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Descriptionv");
@@ -110,25 +111,30 @@ namespace GMS.Data.Migrations
 
             modelBuilder.Entity("GMS.Data.Models.Lesson", b =>
                 {
-                    b.Property<Guid>("TeacherId");
-
-                    b.Property<Guid>("StudentId");
-
-                    b.Property<DateTime>("DateTime");
+                    b.Property<Guid>("LessonId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("Cost");
 
-                    b.Property<Guid>("InstrumentID");
+                    b.Property<DateTime>("DateTime");
+
+                    b.Property<string>("InstrumentID");
 
                     b.Property<string>("LessonType");
 
                     b.Property<int>("Status");
 
-                    b.HasKey("TeacherId", "StudentId", "DateTime");
+                    b.Property<Guid>("StudentId");
+
+                    b.Property<Guid>("TeacherId");
+
+                    b.HasKey("LessonId");
 
                     b.HasIndex("InstrumentID");
 
                     b.HasIndex("StudentId");
+
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Lesson");
                 });
@@ -269,8 +275,7 @@ namespace GMS.Data.Migrations
                 {
                     b.HasOne("GMS.Data.Models.Instrument", "Instrument")
                         .WithMany()
-                        .HasForeignKey("InstrumentID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("InstrumentID");
 
                     b.HasOne("GMS.Data.Models.Student", "Student")
                         .WithMany()

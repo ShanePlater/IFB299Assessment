@@ -1,10 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@using GMS.Data.Models
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Mika's Music School</title>
-    <link rel="shortcut icon type="image/x-icon" href="~/images/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.ico" />
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
@@ -32,40 +38,60 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="About">ABOUT</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">CONTACT</a></li>
-                    <li><a asp-area="" asp-controller="Account" asp-action="Login">LOGIN</a></li>
-                    <li><a asp-area="" asp-controller="Account" asp-action="Register">REGISTER</a></li>
                 </ul>
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <form asp-area="" asp-controller="Session" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a asp-area="" asp-controller="Account" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                            </li>
+                            <li>
+                                <button type="submit" class="btn btn-link navbar-btn navbar-link">Log out</button>
+                            </li>
+                        </ul>
+                    </form>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a asp-area="" asp-controller="Session" asp-action="Register">Register</a></li>
+                        <li><a asp-area="" asp-controller="Session" asp-action="Login">Log in</a></li>
+                    </ul>
+                }
             </div>
         </div>
     </nav>
     <div class="container body-content">
         @RenderBody()
         <footer class="flex-rw" id="footer">
-                <ul class="footer-list-top">
-                <li><h4 class="footer-list-header" asp-area="" asp-controller="Home" asp-action="Services"> Services</h4>
-                            <li><a class="generic-anchor footer-list-anchor"> Instrumental Lessons</a></li>
-                            <li><a class="generic-anchor footer-list-anchor"> Music Theory</a></li>
-                            <li><a class="generic-anchor footer-list-anchor"> Other Services</a></li>
-                </ul>
-                <ul class="footer-list-top">
-                    <li><h4 class="footer-list-header" asp-area="" asp-controller="Home" asp-action="About"> About Us </h4></li>
-                            <li><a class="generic-anchor footer-list-anchor"> Our Story</a></li>                     
-                </ul>
-                <ul class="footer-list-top">
+            <ul class="footer-list-top">
+                <li><h4 class="footer-list-header" asp-area="" asp-controller="Home" asp-action="Services"> Services</h4></li>
+                <li><a class="generic-anchor footer-list-anchor"> Instrumental Lessons</a></li>
+                <li><a class="generic-anchor footer-list-anchor"> Music Theory</a></li>
+                <li><a class="generic-anchor footer-list-anchor"> Other Services</a></li>
+            </ul>
+            <ul class="footer-list-top">
+                <li><h4 class="footer-list-header" asp-area="" asp-controller="Home" asp-action="About"> About Us </h4></li>
+                <li><a class="generic-anchor footer-list-anchor"> Our Story</a></li>
+            </ul>
+            <ul class="footer-list-top">
                 <li><h4 class="footer-list-header" asp-area="" asp-controller="Home" asp-action="Contact">Contact</h4></li>
-                            <li><a class="generic-anchor footer-list-anchor"> Contact Us</a></li>
-                            <li><a class="generic-anchor footer-list-anchor"> FAQ</a></li>                    
-                </ul>
-                <ul class="footer-list-top">
+                <li><a class="generic-anchor footer-list-anchor"> Contact Us</a></li>
+                <li><a class="generic-anchor footer-list-anchor"> FAQ</a></li>
+            </ul>
+            <ul class="footer-list-top">
                 <li><h4 class="footer-list-header" asp-area="" asp-controller="Home" asp-action="Legal"> Legal</h4></li>
-                            <li><a class="footer-list-anchor"> Terms of Use</a></li> 
-                            <li><a class="footer-list-anchor"> Privacy and Policy</a></li> 
-                </ul>
-                <ul class="footer-list-top">
+                <li><a class="footer-list-anchor"> Terms of Use</a></li>
+                <li><a class="footer-list-anchor"> Privacy and Policy</a></li>
+            </ul>
+            <ul class="footer-list-top">
+                <li>
                     <h4 class="footer-list-header">Connect With Us</h4>
-                   <section class="footer-social-section flex-rw">
-                    </section>
-                </ul>
+                    <section class="footer-social-section flex-rw"></section>
+                </li>
+            </ul>
         </footer>
     </div>
 
