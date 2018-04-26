@@ -6,13 +6,15 @@ namespace GMS.Data.Models
 {
     public class Lesson
     {
-        [Key]
+        public Guid LessonId { get; set; }
+
+        [Required]
         public Teacher Teacher { get; set; }
 
-        [Key]
+        [Required]
         public Student Student { get; set; }
 
-        [Key]
+        [Required]
         public DateTime DateTime { get; set; }
 
         public Instrument Instrument { get; set; }

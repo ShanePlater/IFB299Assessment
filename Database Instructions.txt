@@ -1,0 +1,9 @@
+In MySQL
+1. Create User account using create_user.sql
+
+
+
+On Visual Studio
+1. Open Package Manager Console
+2. Select GMS.Data as default project
+3. Type Update-Database and Enter.

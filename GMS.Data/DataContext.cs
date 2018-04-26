@@ -28,11 +28,11 @@ namespace GMS.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Lesson>().ToTable("Lesson");
             modelBuilder.Entity<Student>().ToTable("Student");
             modelBuilder.Entity<Teacher>().ToTable("Teacher");
+            modelBuilder.Entity<Lesson>().ToTable("Lesson");
             modelBuilder.Entity<Instrument>().ToTable("Instrument");
-        }
 
+        }
     }
 }

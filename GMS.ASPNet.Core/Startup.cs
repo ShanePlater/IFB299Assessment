@@ -24,7 +24,7 @@ namespace GMS.ASPNet.Core
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseMySql(Configuration.GetConnectionString("MySQLConnection")));
 
             services.AddIdentity<User, IdentityRole<Guid>>().AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
