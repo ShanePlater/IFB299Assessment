@@ -36,6 +36,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Services">SERVICES</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">ABOUT</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">CONTACT</a></li>
                 </ul>
@@ -78,7 +79,7 @@
             </ul>
             <ul class="footer-list-top">
                 <li><h4 class="footer-list-header" asp-area="" asp-controller="Home" asp-action="Contact">Contact</h4></li>
-                <li><a class="generic-anchor footer-list-anchor"> Contact Us</a></li>
+                <li><a class="generic-anchor footer-list-anchor" asp-area="" asp-controller="Home" asp-action="Contact"> Contact Us</a></li>
                 <li><a class="generic-anchor footer-list-anchor"> FAQ</a></li>
             </ul>
             <ul class="footer-list-top">

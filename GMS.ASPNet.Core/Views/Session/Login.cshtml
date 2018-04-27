@@ -8,45 +8,61 @@
     ViewData["Title"] = "Log in";
 }
 
-<div class="form-signin">
+<body class="login-bg">
+    <div class="form-signin">
         <section>
             <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
-                <h4>log in</h4>
+                <h4 class="title" id="login-title">Welcome Back</h4>
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Email"></label>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                
+                <div class="social-login">
+                    <div class="form-group">
+                        <input asp-for="Email" class="form-control" placeholder="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="Password" class="form-control" placeholder="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Password"></label>
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
+
+                <div class="form-group" id="login-wrap-text">
+                    <div class="checkbox" id="login-wrap-first">
                         <label asp-for="RememberMe">
                             <input asp-for="RememberMe" />
                             @Html.DisplayNameFor(m => m.RememberMe)
                         </label>
                     </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-default">Log in</button>
-                </div>
-                <div class="form-group">
-                    <p>
-                        <a asp-action="ForgotPassword">Forgot your password?</a>
+                    <p id="login-wrap-second">
+                        <a asp-action="ForgotPassword" class="linkdark">Forgot your password?</a>
                     </p>
+                </div>
+
+
+                <div class="form-group">
+                    <button type="submit" class="default-button">Log in</button>
+                </div>
+                <div class="social-login">
+                <button class="loginBtn loginBtn--facebook">
+                    Login with Facebook
+                </button>
+
+                <button class="loginBtn loginBtn--google">
+                    Login with Google
+                </button>
+                </div>
+
+
+                <div class="form-group">
                     <p>
-                        <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Register as a new user?</a>
+                        Don't have an account? <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" class="linkdark" id="no-acc">Create an account!</a>
                     </p>
                 </div>
             </form>
         </section>
-</div>
-
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
+    </div>
+</body>
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
