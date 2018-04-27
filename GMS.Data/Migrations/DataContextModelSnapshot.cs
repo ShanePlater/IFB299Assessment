@@ -97,7 +97,7 @@ namespace GMS.Data.Migrations
                     b.Property<Guid>("InstrumentID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Descriptionv");
+                    b.Property<string>("Description");
 
                     b.Property<string>("HireCost");
 

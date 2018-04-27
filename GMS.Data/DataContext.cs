@@ -8,6 +8,10 @@ namespace GMS.Data
 {
     public class DataContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
     {
+        /// <summary>
+        /// A call to the super constructor
+        /// </summary>
+        /// <param name="options">Options for Database Model such as the Connection String</param>
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
@@ -23,19 +27,27 @@ namespace GMS.Data
 
         public DbSet<Instrument> Instruments { get; set; }
 
+
+        /// <summary>
+        /// Executed when EF is being initialised by the application
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
+            // Models are mapped to singular names. i.e. Student is mapped to a table named Student instead of Students
             modelBuilder.Entity<Student>().ToTable("Student");
             modelBuilder.Entity<Teacher>().ToTable("Teacher");
             modelBuilder.Entity<Lesson>().ToTable("Lesson");
             modelBuilder.Entity<Instrument>().ToTable("Instrument");
             modelBuilder.Entity<Availability>().ToTable("Availability");
 
+            // Composite key for Availability
             modelBuilder.Entity<Availability>()
                 .HasKey(c => new { c.TeacherId, c.DateTime });
 
+            // Composite key for Lesson
             modelBuilder.Entity<Lesson>()
                 .HasKey(c => new { c.TeacherId, c.StudentId, c.DateTime });
 

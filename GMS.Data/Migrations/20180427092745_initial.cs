@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
+using System.Collections.Generic;
 
 namespace GMS.Data.Migrations
 {
-    public partial class IntialCreate : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,8 +55,8 @@ namespace GMS.Data.Migrations
                 name: "Instrument",
                 columns: table => new
                 {
-                    InstrumentID = table.Column<string>(nullable: false),
-                    Descriptionv = table.Column<string>(nullable: true),
+                    InstrumentID = table.Column<Guid>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
                     HireCost = table.Column<string>(nullable: true),
                     Type = table.Column<string>(nullable: true)
                 },
@@ -69,7 +70,7 @@ namespace GMS.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true),
                     RoleId = table.Column<Guid>(nullable: false)
@@ -90,7 +91,7 @@ namespace GMS.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true),
                     UserId = table.Column<Guid>(nullable: false)
@@ -171,38 +172,56 @@ namespace GMS.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Lesson",
+                name: "Availability",
                 columns: table => new
                 {
-                    DateTime = table.Column<DateTime>(nullable: false),
-                    Cost = table.Column<int>(nullable: false),
-                    InstrumentID = table.Column<string>(nullable: true),
-                    LessonType = table.Column<string>(nullable: true),
-                    Status = table.Column<int>(nullable: false),
-                    StudentId = table.Column<Guid>(nullable: true),
-                    TeacherId = table.Column<Guid>(nullable: true)
+                    TeacherId = table.Column<Guid>(nullable: false),
+                    DateTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Lesson", x => x.DateTime);
+                    table.PrimaryKey("PK_Availability", x => new { x.TeacherId, x.DateTime });
+                    table.ForeignKey(
+                        name: "FK_Availability_AspNetUsers_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Lesson",
+                columns: table => new
+                {
+                    TeacherId = table.Column<Guid>(nullable: false),
+                    StudentId = table.Column<Guid>(nullable: false),
+                    DateTime = table.Column<DateTime>(nullable: false),
+                    Cost = table.Column<int>(nullable: false),
+                    InstrumentID = table.Column<Guid>(nullable: false),
+                    LessonType = table.Column<string>(nullable: true),
+                    Status = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Lesson", x => new { x.TeacherId, x.StudentId, x.DateTime });
                     table.ForeignKey(
                         name: "FK_Lesson_Instrument_InstrumentID",
                         column: x => x.InstrumentID,
                         principalTable: "Instrument",
                         principalColumn: "InstrumentID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Lesson_AspNetUsers_StudentId",
                         column: x => x.StudentId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Lesson_AspNetUsers_TeacherId",
                         column: x => x.TeacherId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -214,8 +233,7 @@ namespace GMS.Data.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -241,8 +259,7 @@ namespace GMS.Data.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Lesson_InstrumentID",
@@ -253,11 +270,6 @@ namespace GMS.Data.Migrations
                 name: "IX_Lesson_StudentId",
                 table: "Lesson",
                 column: "StudentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Lesson_TeacherId",
-                table: "Lesson",
-                column: "TeacherId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -276,6 +288,9 @@ namespace GMS.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Availability");
 
             migrationBuilder.DropTable(
                 name: "Lesson");

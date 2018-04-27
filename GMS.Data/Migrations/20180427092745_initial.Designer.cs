@@ -13,8 +13,8 @@ using System;
 namespace GMS.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180426011505_mysql")]
-    partial class mysql
+    [Migration("20180427092745_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,53 +23,7 @@ namespace GMS.Data.Migrations
                 .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
 
-            modelBuilder.Entity("GMS.Data.Models.Instrument", b =>
-                {
-                    b.Property<string>("InstrumentID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Descriptionv");
-
-                    b.Property<string>("HireCost");
-
-                    b.Property<string>("Type");
-
-                    b.HasKey("InstrumentID");
-
-                    b.ToTable("Instrument");
-                });
-
-            modelBuilder.Entity("GMS.Data.Models.Lesson", b =>
-                {
-                    b.Property<Guid>("LessonId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("Cost");
-
-                    b.Property<DateTime>("DateTime");
-
-                    b.Property<string>("InstrumentID");
-
-                    b.Property<string>("LessonType");
-
-                    b.Property<int>("Status");
-
-                    b.Property<Guid>("StudentId");
-
-                    b.Property<Guid>("TeacherId");
-
-                    b.HasKey("LessonId");
-
-                    b.HasIndex("InstrumentID");
-
-                    b.HasIndex("StudentId");
-
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("Lesson");
-                });
-
-            modelBuilder.Entity("GMS.Data.Models.User", b =>
+            modelBuilder.Entity("GMS.Data.Models.AppUser", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -125,7 +79,59 @@ namespace GMS.Data.Migrations
 
                     b.ToTable("AspNetUsers");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AppUser");
+                });
+
+            modelBuilder.Entity("GMS.Data.Models.Availability", b =>
+                {
+                    b.Property<Guid>("TeacherId");
+
+                    b.Property<DateTime>("DateTime");
+
+                    b.HasKey("TeacherId", "DateTime");
+
+                    b.ToTable("Availability");
+                });
+
+            modelBuilder.Entity("GMS.Data.Models.Instrument", b =>
+                {
+                    b.Property<Guid>("InstrumentID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("HireCost");
+
+                    b.Property<string>("Type");
+
+                    b.HasKey("InstrumentID");
+
+                    b.ToTable("Instrument");
+                });
+
+            modelBuilder.Entity("GMS.Data.Models.Lesson", b =>
+                {
+                    b.Property<Guid>("TeacherId");
+
+                    b.Property<Guid>("StudentId");
+
+                    b.Property<DateTime>("DateTime");
+
+                    b.Property<int>("Cost");
+
+                    b.Property<Guid>("InstrumentID");
+
+                    b.Property<string>("LessonType");
+
+                    b.Property<int>("Status");
+
+                    b.HasKey("TeacherId", "StudentId", "DateTime");
+
+                    b.HasIndex("InstrumentID");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Lesson");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -234,7 +240,7 @@ namespace GMS.Data.Migrations
 
             modelBuilder.Entity("GMS.Data.Models.Student", b =>
                 {
-                    b.HasBaseType("GMS.Data.Models.User");
+                    b.HasBaseType("GMS.Data.Models.AppUser");
 
 
                     b.ToTable("Student");
@@ -244,7 +250,7 @@ namespace GMS.Data.Migrations
 
             modelBuilder.Entity("GMS.Data.Models.Teacher", b =>
                 {
-                    b.HasBaseType("GMS.Data.Models.User");
+                    b.HasBaseType("GMS.Data.Models.AppUser");
 
 
                     b.ToTable("Teacher");
@@ -252,11 +258,20 @@ namespace GMS.Data.Migrations
                     b.HasDiscriminator().HasValue("Teacher");
                 });
 
+            modelBuilder.Entity("GMS.Data.Models.Availability", b =>
+                {
+                    b.HasOne("GMS.Data.Models.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("GMS.Data.Models.Lesson", b =>
                 {
                     b.HasOne("GMS.Data.Models.Instrument", "Instrument")
                         .WithMany()
-                        .HasForeignKey("InstrumentID");
+                        .HasForeignKey("InstrumentID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("GMS.Data.Models.Student", "Student")
                         .WithMany()
@@ -279,7 +294,7 @@ namespace GMS.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("GMS.Data.Models.User")
+                    b.HasOne("GMS.Data.Models.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -287,7 +302,7 @@ namespace GMS.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("GMS.Data.Models.User")
+                    b.HasOne("GMS.Data.Models.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -300,7 +315,7 @@ namespace GMS.Data.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GMS.Data.Models.User")
+                    b.HasOne("GMS.Data.Models.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -308,7 +323,7 @@ namespace GMS.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("GMS.Data.Models.User")
+                    b.HasOne("GMS.Data.Models.AppUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

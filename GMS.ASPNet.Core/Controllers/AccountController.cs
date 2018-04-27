@@ -9,6 +9,10 @@ using Microsoft.Extensions.Logging;
 
 namespace GMS.ASPNet.Core.Controllers
 {
+    /// <summary>
+    /// AccountController handles all actions to performed on users exluding session management such as login, logout
+    /// All GMS related actions such as assigning student/teacher/admin priviledges are handled here
+    /// </summary>
     [Authorize]
     public class AccountController : Controller
     {
@@ -18,7 +22,14 @@ namespace GMS.ASPNet.Core.Controllers
         private readonly ILogger _logger;
         private DataContext _context;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, DataContext context,  ILogger<SessionController> logger)
+        /// <summary>
+        /// Constructor uses Dependency Injection to retrieve services registerd previously in Startup.cs
+        /// </summary>
+        /// <param name="userManager">ASP Net Identity UserManager instance</param>
+        /// <param name="signInManager">ASP Net Identity SignInManager instance</param>
+        /// <param name="context">Entity Framework inherited GMS.Data.DataContext instance</param>
+        /// <param name="logger">Framework provided logger for logging</param>
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, DataContext context,  ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -26,6 +37,11 @@ namespace GMS.ASPNet.Core.Controllers
             _context = context;
         }
 
+
+        /// <summary>
+        /// Displays the currently signed in user's profile
+        /// </summary>
+        /// <returns>The AppUser object to be displayed by the webpage</returns>
         public async Task<IActionResult> Index()
         {
             if (_signInManager.IsSignedIn(User))
@@ -34,6 +50,11 @@ namespace GMS.ASPNet.Core.Controllers
             return RedirectToAction("Login", "Session");
         }
 
+
+        /// <summary>
+        /// Backend action to create roles
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Roles()
         {
             if (!await _roleManager.RoleExistsAsync("Super Administrator"))

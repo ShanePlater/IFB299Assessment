@@ -1,9 +1,9 @@
 In MySQL
 1. Create User account using create_user.sql
+2. Create Database using GMS_master.sql
 
 
 
 On Visual Studio
-1. Open Package Manager Console
-2. Select GMS.Data as default project
-3. Type Update-Database and Enter.
+1. Rebuild project
+2. Run

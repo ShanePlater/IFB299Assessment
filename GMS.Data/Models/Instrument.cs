@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GMS.Data.Models
 {
+    /// <summary>
+    /// An Instrument to be hired
+    /// </summary>
     public class Instrument
     {
         [Key] public Guid InstrumentID { get; set; }
@@ -11,7 +14,7 @@ namespace GMS.Data.Models
 
         public string HireCost { get; set; }
 
-        public string Descriptionv { get; set; } = "Dat badass violin";
+        public string Description { get; set; } = "Dat badass violin";
 
 
     }
