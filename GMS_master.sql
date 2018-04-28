@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2018 at 11:29 AM
+-- Generation Time: Apr 28, 2018 at 11:10 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -18,9 +18,11 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+
 --
 -- Database: `gms_master`
 --
+DROP DATABASE IF EXISTS `gms_master`;
 CREATE DATABASE IF NOT EXISTS `gms_master` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `gms_master`;
 
@@ -49,6 +51,16 @@ CREATE TABLE `aspnetroles` (
   `Name` varchar(256) DEFAULT NULL,
   `NormalizedName` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `aspnetroles`
+--
+
+INSERT INTO `aspnetroles` (`Id`, `ConcurrencyStamp`, `Name`, `NormalizedName`) VALUES
+('08d5ace6-5ccb-cc25-88ff-0f9ceb5c5d05', '68b116dc-e4f9-409c-bcea-c9c73d22b633', 'Super Administrator', 'SUPER ADMINISTRATOR'),
+('08d5ace6-5cf0-f461-a193-3f8bc31a2c5e', '4210fffa-af70-4f4a-9a1c-4a52e7c2b87f', 'Administrator', 'ADMINISTRATOR'),
+('08d5ace6-5d00-0609-f437-acc34660351b', 'a6cc7904-4ab4-4e9a-8cc9-31bf9e748edc', 'Student', 'STUDENT'),
+('08d5ace6-5d07-3824-286a-6fe1ca2678ca', '0d4c8e52-bc9f-4d65-ba99-075fa4e15a02', 'Teacher', 'TEACHER');
 
 -- --------------------------------------------------------
 
@@ -97,10 +109,10 @@ CREATE TABLE `aspnetusers` (
   `Id` char(36) NOT NULL,
   `AccessFailedCount` int(11) NOT NULL,
   `ConcurrencyStamp` longtext,
-  `Discriminator` longtext NOT NULL,
   `Email` varchar(256) DEFAULT NULL,
   `EmailConfirmed` bit(1) NOT NULL,
   `FirstName` longtext,
+  `IsTeacher` bit(1) NOT NULL,
   `LastName` longtext,
   `LockoutEnabled` bit(1) NOT NULL,
   `LockoutEnd` datetime(6) DEFAULT NULL,
@@ -113,6 +125,13 @@ CREATE TABLE `aspnetusers` (
   `TwoFactorEnabled` bit(1) NOT NULL,
   `UserName` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `aspnetusers`
+--
+
+INSERT INTO `aspnetusers` (`Id`, `AccessFailedCount`, `ConcurrencyStamp`, `Email`, `EmailConfirmed`, `FirstName`, `IsTeacher`, `LastName`, `LockoutEnabled`, `LockoutEnd`, `NormalizedEmail`, `NormalizedUserName`, `PasswordHash`, `PhoneNumber`, `PhoneNumberConfirmed`, `SecurityStamp`, `TwoFactorEnabled`, `UserName`) VALUES
+('08d5acd9-cd48-e42e-7ac6-1e9407a2d650', 0, '1825438f-ac4c-4559-8cbd-3d0a66c2dfce', 'avinkavish@gmail.com', b'0', 'Avin', b'0', 'Abeyratne', b'1', NULL, 'AVINKAVISH@GMAIL.COM', 'AVINKAVISH@GMAIL.COM', 'AQAAAAEAACcQAAAAEAZd7kiu7fOQwvh+f/d9TZ5qZ7d5AdjAJycedF82bfHlOHMHkWDjNcModis2TdOE1Q==', NULL, b'0', 'f8505d06-4043-4575-8f91-3a02c783007c', b'0', 'avinkavish@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -134,7 +153,7 @@ CREATE TABLE `aspnetusertokens` (
 --
 
 CREATE TABLE `availability` (
-  `TeacherId` char(36) NOT NULL,
+  `UserId` char(36) NOT NULL,
   `DateTime` datetime(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -154,12 +173,23 @@ CREATE TABLE `instrument` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `instumenttype`
+--
+
+CREATE TABLE `instumenttype` (
+  `Type` varchar(127) NOT NULL,
+  `AppUserId` char(36) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `lesson`
 --
 
 CREATE TABLE `lesson` (
-  `TeacherId` char(36) NOT NULL,
-  `StudentId` char(36) NOT NULL,
+  `TaughtById` char(36) NOT NULL,
+  `TaughtToId` char(36) NOT NULL,
   `DateTime` datetime(6) NOT NULL,
   `Cost` int(11) NOT NULL,
   `InstrumentID` char(36) NOT NULL,
@@ -183,7 +213,7 @@ CREATE TABLE `__efmigrationshistory` (
 --
 
 INSERT INTO `__efmigrationshistory` (`MigrationId`, `ProductVersion`) VALUES
-('20180427092745_initial', '2.0.2-rtm-10011');
+('20180428072248_initial', '2.0.2-rtm-10011');
 
 --
 -- Indexes for dumped tables
@@ -242,7 +272,7 @@ ALTER TABLE `aspnetusertokens`
 -- Indexes for table `availability`
 --
 ALTER TABLE `availability`
-  ADD PRIMARY KEY (`TeacherId`,`DateTime`);
+  ADD PRIMARY KEY (`UserId`,`DateTime`);
 
 --
 -- Indexes for table `instrument`
@@ -251,12 +281,19 @@ ALTER TABLE `instrument`
   ADD PRIMARY KEY (`InstrumentID`);
 
 --
+-- Indexes for table `instumenttype`
+--
+ALTER TABLE `instumenttype`
+  ADD PRIMARY KEY (`Type`),
+  ADD KEY `IX_InstumentType_AppUserId` (`AppUserId`);
+
+--
 -- Indexes for table `lesson`
 --
 ALTER TABLE `lesson`
-  ADD PRIMARY KEY (`TeacherId`,`StudentId`,`DateTime`),
+  ADD PRIMARY KEY (`TaughtById`,`TaughtToId`,`DateTime`),
   ADD KEY `IX_Lesson_InstrumentID` (`InstrumentID`),
-  ADD KEY `IX_Lesson_StudentId` (`StudentId`);
+  ADD KEY `IX_Lesson_TaughtToId` (`TaughtToId`);
 
 --
 -- Indexes for table `__efmigrationshistory`
@@ -319,14 +356,20 @@ ALTER TABLE `aspnetusertokens`
 -- Constraints for table `availability`
 --
 ALTER TABLE `availability`
-  ADD CONSTRAINT `FK_Availability_AspNetUsers_TeacherId` FOREIGN KEY (`TeacherId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FK_Availability_AspNetUsers_UserId` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `instumenttype`
+--
+ALTER TABLE `instumenttype`
+  ADD CONSTRAINT `FK_InstumentType_AspNetUsers_AppUserId` FOREIGN KEY (`AppUserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE NO ACTION;
 
 --
 -- Constraints for table `lesson`
 --
 ALTER TABLE `lesson`
-  ADD CONSTRAINT `FK_Lesson_AspNetUsers_StudentId` FOREIGN KEY (`StudentId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_Lesson_AspNetUsers_TeacherId` FOREIGN KEY (`TeacherId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_Lesson_AspNetUsers_TaughtById` FOREIGN KEY (`TaughtById`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_Lesson_AspNetUsers_TaughtToId` FOREIGN KEY (`TaughtToId`) REFERENCES `aspnetusers` (`Id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_Lesson_Instrument_InstrumentID` FOREIGN KEY (`InstrumentID`) REFERENCES `instrument` (`InstrumentID`) ON DELETE CASCADE;
 COMMIT;
 
