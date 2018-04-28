@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
 namespace GMS.Data.Models
@@ -8,9 +11,24 @@ namespace GMS.Data.Models
     /// </summary>
     public class AppUser : IdentityUser<Guid>
     {
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
+        [Display(Name = "First Name")]
         public string LastName { get; set; }
+
+        [Display(Name = "First Name")]
+        public bool IsTeacher { get; set; }
+
+        public List<InstumentType> Instruments { get; set; }
+
+        [InverseProperty("TaughtTo")]
+        public List<Lesson> LessonsTaken { get; set; }
+
+        [InverseProperty("TaughtBy")]
+        public List<Lesson> LessonsTaught { get; set; }
+
+        public List<Availability> Availabilities { get; set; }
 
     }
 }

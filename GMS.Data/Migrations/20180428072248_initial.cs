@@ -30,10 +30,10 @@ namespace GMS.Data.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
-                    Discriminator = table.Column<string>(nullable: false),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
+                    IsTeacher = table.Column<bool>(nullable: false),
                     LastName = table.Column<string>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
@@ -175,26 +175,44 @@ namespace GMS.Data.Migrations
                 name: "Availability",
                 columns: table => new
                 {
-                    TeacherId = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false),
                     DateTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Availability", x => new { x.TeacherId, x.DateTime });
+                    table.PrimaryKey("PK_Availability", x => new { x.UserId, x.DateTime });
                     table.ForeignKey(
-                        name: "FK_Availability_AspNetUsers_TeacherId",
-                        column: x => x.TeacherId,
+                        name: "FK_Availability_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
+                name: "InstumentType",
+                columns: table => new
+                {
+                    Type = table.Column<string>(nullable: false),
+                    AppUserId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InstumentType", x => x.Type);
+                    table.ForeignKey(
+                        name: "FK_InstumentType_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Lesson",
                 columns: table => new
                 {
-                    TeacherId = table.Column<Guid>(nullable: false),
-                    StudentId = table.Column<Guid>(nullable: false),
+                    TaughtById = table.Column<Guid>(nullable: false),
+                    TaughtToId = table.Column<Guid>(nullable: false),
                     DateTime = table.Column<DateTime>(nullable: false),
                     Cost = table.Column<int>(nullable: false),
                     InstrumentID = table.Column<Guid>(nullable: false),
@@ -203,7 +221,7 @@ namespace GMS.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Lesson", x => new { x.TeacherId, x.StudentId, x.DateTime });
+                    table.PrimaryKey("PK_Lesson", x => new { x.TaughtById, x.TaughtToId, x.DateTime });
                     table.ForeignKey(
                         name: "FK_Lesson_Instrument_InstrumentID",
                         column: x => x.InstrumentID,
@@ -211,14 +229,14 @@ namespace GMS.Data.Migrations
                         principalColumn: "InstrumentID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Lesson_AspNetUsers_StudentId",
-                        column: x => x.StudentId,
+                        name: "FK_Lesson_AspNetUsers_TaughtById",
+                        column: x => x.TaughtById,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Lesson_AspNetUsers_TeacherId",
-                        column: x => x.TeacherId,
+                        name: "FK_Lesson_AspNetUsers_TaughtToId",
+                        column: x => x.TaughtToId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -262,14 +280,19 @@ namespace GMS.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_InstumentType_AppUserId",
+                table: "InstumentType",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Lesson_InstrumentID",
                 table: "Lesson",
                 column: "InstrumentID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Lesson_StudentId",
+                name: "IX_Lesson_TaughtToId",
                 table: "Lesson",
-                column: "StudentId");
+                column: "TaughtToId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -291,6 +314,9 @@ namespace GMS.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Availability");
+
+            migrationBuilder.DropTable(
+                name: "InstumentType");
 
             migrationBuilder.DropTable(
                 name: "Lesson");

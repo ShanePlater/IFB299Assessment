@@ -8,15 +8,15 @@ namespace GMS.Data.Models
     /// </summary>
     public class Lesson
     {
-        public Guid TeacherId { get; set; }
+        public Guid TaughtById { get; set; }
 
         [Required]
-        public Teacher Teacher { get; set; }
+        public AppUser TaughtBy { get; set; }
 
-        public Guid StudentId { get; set; }
+        public Guid TaughtToId { get; set; }
 
         [Required]
-        public Student Student { get; set; }
+        public AppUser TaughtTo { get; set; }
 
         [Required]
         public DateTime DateTime { get; set; }

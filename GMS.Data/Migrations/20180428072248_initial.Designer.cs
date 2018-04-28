@@ -7,13 +7,12 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
-using Microsoft.EntityFrameworkCore.ValueGeneration;
 using System;
 
 namespace GMS.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180427092745_initial")]
+    [Migration("20180428072248_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,15 +32,14 @@ namespace GMS.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
-
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
 
                     b.Property<string>("FirstName");
+
+                    b.Property<bool>("IsTeacher");
 
                     b.Property<string>("LastName");
 
@@ -78,17 +76,15 @@ namespace GMS.Data.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("AppUser");
                 });
 
             modelBuilder.Entity("GMS.Data.Models.Availability", b =>
                 {
-                    b.Property<Guid>("TeacherId");
+                    b.Property<Guid>("UserId");
 
                     b.Property<DateTime>("DateTime");
 
-                    b.HasKey("TeacherId", "DateTime");
+                    b.HasKey("UserId", "DateTime");
 
                     b.ToTable("Availability");
                 });
@@ -109,11 +105,25 @@ namespace GMS.Data.Migrations
                     b.ToTable("Instrument");
                 });
 
+            modelBuilder.Entity("GMS.Data.Models.InstumentType", b =>
+                {
+                    b.Property<string>("Type")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("AppUserId");
+
+                    b.HasKey("Type");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("InstumentType");
+                });
+
             modelBuilder.Entity("GMS.Data.Models.Lesson", b =>
                 {
-                    b.Property<Guid>("TeacherId");
+                    b.Property<Guid>("TaughtById");
 
-                    b.Property<Guid>("StudentId");
+                    b.Property<Guid>("TaughtToId");
 
                     b.Property<DateTime>("DateTime");
 
@@ -125,11 +135,11 @@ namespace GMS.Data.Migrations
 
                     b.Property<int>("Status");
 
-                    b.HasKey("TeacherId", "StudentId", "DateTime");
+                    b.HasKey("TaughtById", "TaughtToId", "DateTime");
 
                     b.HasIndex("InstrumentID");
 
-                    b.HasIndex("StudentId");
+                    b.HasIndex("TaughtToId");
 
                     b.ToTable("Lesson");
                 });
@@ -238,32 +248,19 @@ namespace GMS.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("GMS.Data.Models.Student", b =>
-                {
-                    b.HasBaseType("GMS.Data.Models.AppUser");
-
-
-                    b.ToTable("Student");
-
-                    b.HasDiscriminator().HasValue("Student");
-                });
-
-            modelBuilder.Entity("GMS.Data.Models.Teacher", b =>
-                {
-                    b.HasBaseType("GMS.Data.Models.AppUser");
-
-
-                    b.ToTable("Teacher");
-
-                    b.HasDiscriminator().HasValue("Teacher");
-                });
-
             modelBuilder.Entity("GMS.Data.Models.Availability", b =>
                 {
-                    b.HasOne("GMS.Data.Models.Teacher", "Teacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherId")
+                    b.HasOne("GMS.Data.Models.AppUser", "User")
+                        .WithMany("Availabilities")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("GMS.Data.Models.InstumentType", b =>
+                {
+                    b.HasOne("GMS.Data.Models.AppUser")
+                        .WithMany("Instruments")
+                        .HasForeignKey("AppUserId");
                 });
 
             modelBuilder.Entity("GMS.Data.Models.Lesson", b =>
@@ -273,14 +270,14 @@ namespace GMS.Data.Migrations
                         .HasForeignKey("InstrumentID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GMS.Data.Models.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId")
+                    b.HasOne("GMS.Data.Models.AppUser", "TaughtBy")
+                        .WithMany("LessonsTaught")
+                        .HasForeignKey("TaughtById")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GMS.Data.Models.Teacher", "Teacher")
-                        .WithMany()
-                        .HasForeignKey("TeacherId")
+                    b.HasOne("GMS.Data.Models.AppUser", "TaughtTo")
+                        .WithMany("LessonsTaken")
+                        .HasForeignKey("TaughtToId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -5,6 +5,7 @@ using GMS.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace GMS.ASPNet.Core.Controllers
@@ -18,9 +19,9 @@ namespace GMS.ASPNet.Core.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<IdentityRole<Guid>> _roleManager;
         private readonly ILogger _logger;
-        private DataContext _context;
+        private readonly DataContext _dataContext;
 
         /// <summary>
         /// Constructor uses Dependency Injection to retrieve services registerd previously in Startup.cs
@@ -28,13 +29,15 @@ namespace GMS.ASPNet.Core.Controllers
         /// <param name="userManager">ASP Net Identity UserManager instance</param>
         /// <param name="signInManager">ASP Net Identity SignInManager instance</param>
         /// <param name="context">Entity Framework inherited GMS.Data.DataContext instance</param>
+        /// <param name="roleManager">ASP Net Identity RoleManager instance</param>
         /// <param name="logger">Framework provided logger for logging</param>
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, DataContext context,  ILogger<AccountController> logger)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, DataContext context, RoleManager<IdentityRole<Guid>> roleManager,  ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
             _logger = logger;
-            _context = context;
+            _dataContext = context;
         }
 
 
@@ -50,16 +53,20 @@ namespace GMS.ASPNet.Core.Controllers
             return RedirectToAction("Login", "Session");
         }
 
+        public async Task<IActionResult> List()
+        {
+            return View(await _dataContext.Users.ToListAsync());
+        }
 
         /// <summary>
         /// Backend action to create roles
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> Roles()
+        public async Task<IActionResult> CreateRoles()
         {
             if (!await _roleManager.RoleExistsAsync("Super Administrator"))
             {
-                var role = new IdentityRole
+                var role = new IdentityRole<Guid>
                 {
                     Name = "Super Administrator",
                     
@@ -68,7 +75,7 @@ namespace GMS.ASPNet.Core.Controllers
             }
             if (!await _roleManager.RoleExistsAsync("Administrator"))
             {
-                var role = new IdentityRole
+                var role = new IdentityRole<Guid>
                 {
                     Name = "Administrator",
 
@@ -77,18 +84,18 @@ namespace GMS.ASPNet.Core.Controllers
             }
             if (!await _roleManager.RoleExistsAsync("Student"))
             {
-                var role = new IdentityRole
+                var role = new IdentityRole<Guid>
                 {
-                    Name = "Super Administrator",
+                    Name = "Student",
 
                 };
                 await _roleManager.CreateAsync(role);
             }
             if (!await _roleManager.RoleExistsAsync("Teacher"))
             {
-                var role = new IdentityRole
+                var role = new IdentityRole<Guid>
                 {
-                    Name = "Super Administrator",
+                    Name = "Teacher",
 
                 };
                 await _roleManager.CreateAsync(role);

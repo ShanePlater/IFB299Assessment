@@ -108,6 +108,11 @@ namespace GMS.ASPNet.Core
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "admin-users",
+                    template: "Admin/Users/List",
+                    defaults: new {controller = "Account", action = "List"});
+
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });

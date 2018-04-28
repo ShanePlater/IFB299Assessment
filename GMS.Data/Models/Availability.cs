@@ -9,9 +9,9 @@ namespace GMS.Data.Models
     /// </summary>
     public class Availability
     {
-        public Guid TeacherId { get; set; }
+        public Guid UserId { get; set; }
 
-        public Teacher Teacher { get; set; }
+        public AppUser User { get; set; }
 
         public DateTime DateTime { get; set; }
     }
