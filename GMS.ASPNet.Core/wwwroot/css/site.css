@@ -163,6 +163,7 @@ main {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    background-color:black;
 }
 
 .title {
@@ -284,7 +285,7 @@ main {
     }
 }
 
-                                        /* LOG IN PAGE */
+                                                        /* LOG IN PAGE */
 .login-bg {
     background-image: url(../images/guitar.jpg);
     height: 100%;
@@ -293,6 +294,7 @@ main {
     background-repeat: no-repeat;
     background-size: cover;
     text-align: center;
+    background-color:black;
 }
 
 .form-signin {
@@ -399,3 +401,25 @@ main {
     .loginBtn--google:focus {
         background: #E74B37;
     }
+
+/* END OF LOG IN PAGE */
+/* REGISTER PAGE */
+
+.register-bg {
+    background-image: url(../images/violin.jpg);
+    height: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    background-color: black;
+}
+
+.register-form{
+    margin: 6.5% 25%;
+    width: 60%;
+    padding: 5%;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
