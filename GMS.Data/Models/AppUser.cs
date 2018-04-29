@@ -14,10 +14,10 @@ namespace GMS.Data.Models
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
-        [Display(Name = "First Name")]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Display(Name = "First Name")]
+        [Display(Name = "Teacher")]
         public bool IsTeacher { get; set; }
 
         public List<InstumentType> Instruments { get; set; }
