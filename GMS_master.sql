@@ -21,6 +21,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `gms_master`
 --
+DROP DATABASE IF EXISTS `gms_master`;
 CREATE DATABASE IF NOT EXISTS `gms_master` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `gms_master`;
 
