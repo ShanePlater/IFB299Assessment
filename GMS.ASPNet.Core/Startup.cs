@@ -17,7 +17,7 @@ namespace GMS.ASPNet.Core
     public class Startup
     {
         public Startup(IConfiguration configuration)
-        {
+        { 
             Configuration = configuration;
         }
 
@@ -32,7 +32,7 @@ namespace GMS.ASPNet.Core
         {
             // Add GMS.Data.DataContext to servicesn as the Entity Framework Database Model and pass the MySql Connection string to it.
             services.AddDbContext<DataContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("MySQLConnection")));
+                options.UseMySql(Configuration.GetConnectionString("GoogleSQLConnection")));
 
 
             // Add GMS.Data.AppUser as the ASP Net Identity user class, passing IdentityRole<Guid> as the default user role.

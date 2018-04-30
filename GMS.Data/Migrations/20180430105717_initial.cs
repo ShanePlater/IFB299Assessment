@@ -176,7 +176,8 @@ namespace GMS.Data.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(nullable: false),
-                    DateTime = table.Column<DateTime>(nullable: false)
+                    DateTime = table.Column<DateTime>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -194,17 +195,17 @@ namespace GMS.Data.Migrations
                 columns: table => new
                 {
                     Type = table.Column<string>(nullable: false),
-                    AppUserId = table.Column<Guid>(nullable: true)
+                    UserId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InstumentType", x => x.Type);
+                    table.PrimaryKey("PK_InstumentType", x => new { x.Type, x.UserId });
                     table.ForeignKey(
-                        name: "FK_InstumentType_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
+                        name: "FK_InstumentType_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -280,9 +281,9 @@ namespace GMS.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_InstumentType_AppUserId",
+                name: "IX_InstumentType_UserId",
                 table: "InstumentType",
-                column: "AppUserId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Lesson_InstrumentID",
