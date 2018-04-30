@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2018 at 10:47 AM
+-- Generation Time: Apr 28, 2018 at 11:10 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -17,6 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
+
 
 --
 -- Database: `gms_master`
@@ -98,13 +99,6 @@ CREATE TABLE `aspnetuserroles` (
   `RoleId` char(36) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `aspnetuserroles`
---
-
-INSERT INTO `aspnetuserroles` (`UserId`, `RoleId`) VALUES
-('08d5acd9-cd48-e42e-7ac6-1e9407a2d650', '08d5ace6-5cf0-f461-a193-3f8bc31a2c5e');
-
 -- --------------------------------------------------------
 
 --
@@ -137,7 +131,7 @@ CREATE TABLE `aspnetusers` (
 --
 
 INSERT INTO `aspnetusers` (`Id`, `AccessFailedCount`, `ConcurrencyStamp`, `Email`, `EmailConfirmed`, `FirstName`, `IsTeacher`, `LastName`, `LockoutEnabled`, `LockoutEnd`, `NormalizedEmail`, `NormalizedUserName`, `PasswordHash`, `PhoneNumber`, `PhoneNumberConfirmed`, `SecurityStamp`, `TwoFactorEnabled`, `UserName`) VALUES
-('08d5acd9-cd48-e42e-7ac6-1e9407a2d650', 0, '81152b7b-1079-45d6-a525-f7b0d3f519d6', 'avinkavish@gmail.com', b'0', 'Avin', b'0', 'Abeyratne', b'1', NULL, 'AVINKAVISH@GMAIL.COM', 'AVINKAVISH@GMAIL.COM', 'AQAAAAEAACcQAAAAEAZd7kiu7fOQwvh+f/d9TZ5qZ7d5AdjAJycedF82bfHlOHMHkWDjNcModis2TdOE1Q==', '123456789', b'0', 'f8505d06-4043-4575-8f91-3a02c783007c', b'0', 'avinkavish@gmail.com');
+('08d5acd9-cd48-e42e-7ac6-1e9407a2d650', 0, '1825438f-ac4c-4559-8cbd-3d0a66c2dfce', 'avinkavish@gmail.com', b'0', 'Avin', b'0', 'Abeyratne', b'1', NULL, 'AVINKAVISH@GMAIL.COM', 'AVINKAVISH@GMAIL.COM', 'AQAAAAEAACcQAAAAEAZd7kiu7fOQwvh+f/d9TZ5qZ7d5AdjAJycedF82bfHlOHMHkWDjNcModis2TdOE1Q==', NULL, b'0', 'f8505d06-4043-4575-8f91-3a02c783007c', b'0', 'avinkavish@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -159,18 +153,9 @@ CREATE TABLE `aspnetusertokens` (
 --
 
 CREATE TABLE `availability` (
-  `Id` char(36) NOT NULL DEFAULT 'UUID',
   `UserId` char(36) NOT NULL,
   `DateTime` datetime(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `availability`
---
-
-INSERT INTO `availability` (`Id`, `UserId`, `DateTime`) VALUES
-('ac11842a-4b93-11e8-95e9-704d7b6ea76c', '08d5acd9-cd48-e42e-7ac6-1e9407a2d650', '2018-04-29 00:00:00.000000'),
-('c7dba26a-4b93-11e8-95e9-704d7b6ea76c', '08d5acd9-cd48-e42e-7ac6-1e9407a2d650', '2018-04-30 00:00:00.000000');
 
 -- --------------------------------------------------------
 
@@ -193,16 +178,8 @@ CREATE TABLE `instrument` (
 
 CREATE TABLE `instumenttype` (
   `Type` varchar(127) NOT NULL,
-  `UserId` char(36) NOT NULL DEFAULT '00000000-0000-0000-0000-000000000000'
+  `AppUserId` char(36) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `instumenttype`
---
-
-INSERT INTO `instumenttype` (`Type`, `UserId`) VALUES
-('Guitar', '08d5acd9-cd48-e42e-7ac6-1e9407a2d650'),
-('Piano', '08d5acd9-cd48-e42e-7ac6-1e9407a2d650');
 
 -- --------------------------------------------------------
 
@@ -236,8 +213,7 @@ CREATE TABLE `__efmigrationshistory` (
 --
 
 INSERT INTO `__efmigrationshistory` (`MigrationId`, `ProductVersion`) VALUES
-('20180428072248_initial', '2.0.2-rtm-10011'),
-('20180428121418_instrument-type', '2.0.2-rtm-10011');
+('20180428072248_initial', '2.0.2-rtm-10011');
 
 --
 -- Indexes for dumped tables
@@ -308,9 +284,8 @@ ALTER TABLE `instrument`
 -- Indexes for table `instumenttype`
 --
 ALTER TABLE `instumenttype`
-  ADD PRIMARY KEY (`Type`,`UserId`),
-  ADD UNIQUE KEY `AK_InstumentType_Type` (`Type`),
-  ADD KEY `IX_InstumentType_UserId` (`UserId`);
+  ADD PRIMARY KEY (`Type`),
+  ADD KEY `IX_InstumentType_AppUserId` (`AppUserId`);
 
 --
 -- Indexes for table `lesson`
@@ -387,7 +362,7 @@ ALTER TABLE `availability`
 -- Constraints for table `instumenttype`
 --
 ALTER TABLE `instumenttype`
-  ADD CONSTRAINT `Id` FOREIGN KEY (`UserId`) REFERENCES `aspnetusers` (`Id`);
+  ADD CONSTRAINT `FK_InstumentType_AspNetUsers_AppUserId` FOREIGN KEY (`AppUserId`) REFERENCES `aspnetusers` (`Id`) ON DELETE NO ACTION;
 
 --
 -- Constraints for table `lesson`
