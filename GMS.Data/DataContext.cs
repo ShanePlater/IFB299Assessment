@@ -45,6 +45,8 @@ namespace GMS.Data
             modelBuilder.Entity<Lesson>()
                 .HasKey(c => new { c.TaughtById, c.TaughtToId, c.DateTime });
 
+            modelBuilder.Entity<AppUser>().HasMany(u => u.Instruments);
+
             modelBuilder.Entity<InstumentType>().HasKey(i => new {i.Type, i.UserId});
 
 

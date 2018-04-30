@@ -6,6 +6,7 @@ namespace GMS.Data.Models
 {
     public class InstumentType
     {
+        [Key]
         public string Type { get; set; }
 
         public Guid UserId { get; set; }

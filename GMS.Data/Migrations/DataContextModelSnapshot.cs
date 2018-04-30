@@ -38,6 +38,8 @@ namespace GMS.Data.Migrations
 
                     b.Property<string>("FirstName");
 
+                    b.Property<string>("InstumentTypeType");
+
                     b.Property<bool>("IsTeacher");
 
                     b.Property<string>("LastName");
@@ -67,6 +69,8 @@ namespace GMS.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("InstumentTypeType");
+
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
@@ -82,8 +86,6 @@ namespace GMS.Data.Migrations
                     b.Property<Guid>("UserId");
 
                     b.Property<DateTime>("DateTime");
-
-                    b.Property<Guid>("Id");
 
                     b.HasKey("UserId", "DateTime");
 
@@ -108,13 +110,14 @@ namespace GMS.Data.Migrations
 
             modelBuilder.Entity("GMS.Data.Models.InstumentType", b =>
                 {
-                    b.Property<string>("Type");
+                    b.Property<string>("Type")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("UserId");
+                    b.Property<Guid?>("AppUserId");
 
-                    b.HasKey("Type", "UserId");
+                    b.HasKey("Type");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("InstumentType");
                 });
@@ -248,6 +251,13 @@ namespace GMS.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("GMS.Data.Models.AppUser", b =>
+                {
+                    b.HasOne("GMS.Data.Models.InstumentType")
+                        .WithMany("Users")
+                        .HasForeignKey("InstumentTypeType");
+                });
+
             modelBuilder.Entity("GMS.Data.Models.Availability", b =>
                 {
                     b.HasOne("GMS.Data.Models.AppUser", "User")
@@ -258,10 +268,9 @@ namespace GMS.Data.Migrations
 
             modelBuilder.Entity("GMS.Data.Models.InstumentType", b =>
                 {
-                    b.HasOne("GMS.Data.Models.AppUser", "User")
+                    b.HasOne("GMS.Data.Models.AppUser")
                         .WithMany("Instruments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AppUserId");
                 });
 
             modelBuilder.Entity("GMS.Data.Models.Lesson", b =>
