@@ -12,9 +12,10 @@ using System;
 namespace GMS.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180429091729_bleh")]
+    partial class bleh
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,8 +84,6 @@ namespace GMS.Data.Migrations
 
                     b.Property<DateTime>("DateTime");
 
-                    b.Property<Guid>("Id");
-
                     b.HasKey("UserId", "DateTime");
 
                     b.ToTable("Availability");
@@ -113,6 +112,8 @@ namespace GMS.Data.Migrations
                     b.Property<Guid>("UserId");
 
                     b.HasKey("Type", "UserId");
+
+                    b.HasAlternateKey("Type");
 
                     b.HasIndex("UserId");
 
