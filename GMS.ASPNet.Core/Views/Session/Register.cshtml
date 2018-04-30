@@ -4,120 +4,64 @@
 }
 
 <body class="register-bg">
-
-    <!-- multistep form -->
-    <form id="msform">
-        <!-- progressbar -->
-        <ul id="progressbar">
-            <li class="active">Account Setup</li>
-            <li>Social Profiles</li>
-            <li>Personal Details</li>
-        </ul>
-        <!-- fieldsets -->
-        <fieldset>
-            <h2 class="fs-title">Create your account</h2>
-            <h3 class="fs-subtitle">This is step 1</h3>
-            <input type="text" name="email" placeholder="Email" />
-            <input type="password" name="pass" placeholder="Password" />
-            <input type="password" name="cpass" placeholder="Confirm Password" />
-            <input type="button" name="next" class="next action-button" value="Next" />
-        </fieldset>
-        <fieldset>
-            <h2 class="fs-title">Social Profiles</h2>
-            <h3 class="fs-subtitle">Your presence on the social network</h3>
-            <input type="text" name="twitter" placeholder="Twitter" />
-            <input type="text" name="facebook" placeholder="Facebook" />
-            <input type="text" name="gplus" placeholder="Google Plus" />
-            <input type="button" name="previous" class="previous action-button" value="Previous" />
-            <input type="button" name="next" class="next action-button" value="Next" />
-        </fieldset>
-        <fieldset>
-            <h2 class="fs-title">Personal Details</h2>
-            <h3 class="fs-subtitle">We will never sell it</h3>
-            <input type="text" name="fname" placeholder="First Name" />
-            <input type="text" name="lname" placeholder="Last Name" />
-            <input type="text" name="phone" placeholder="Phone" />
-            <textarea name="address" placeholder="Address"></textarea>
-            <input type="button" name="previous" class="previous action-button" value="Previous" />
-            <input type="submit" name="submit" class="submit action-button" value="Submit" />
-        </fieldset>
-    </form>
-
-    <div class="register-form">
-        <section>
-            <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-                <h4 class="title" id="reg-title">Create an account.</h4>
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <p class="reg-label">Personal Details</p>
-
-                <div class="reg-form">
-                    <div class="form-group" id="personaldetails">
-                        <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+    
+    <!-- MultiStep Form -->
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" id="msform">
+                <fieldset>
+                    <h4 class="title" id="reg-title">Create an account.</h4>
+                    <hr />
+                    <h2 class="fs-title">Personal Details</h2>
+                    <h3 class="fs-subtitle">Let us know who you are</h3>
+                    <div class="form-group">
+                        <input asp-for="FirstName" class="form-control" name="fname" placeholder="First Name*" />
                         <span asp-validation-for="FirstName" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="reg-form">
-                    <div class="form-group" id="personaldetails">
-                        <input asp-for="LastName" class="form-control" placeholder="Surname" />
+                    <div class="form-group">
+                        <input asp-for="LastName" class="form-control" name="lname" placeholder="Last Name*" />
                         <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="reg-form">
-                    <div class="form-group" id="personaldetails">
-                        <input asp-for="DOB" class="form-control" />
+                    <div class="form-group">
+                        <input asp-for="DOB" class="form-control" placeholder="Birthday*" />
                         <span asp-validation-for="DOB" class="text-danger"></span>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <input asp-for="PhoneNumber" class="form-control" name="phone" placeholder="Phone Number*" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input name="address" placeholder="Address*" />
+                    </div>
 
-                <div>
-                    <p class="reg-label">Contact Information</p>
-                    <div class="reg-form" id="personaldetails">
-                        <div class="form-group">
-                            <input asp-for="Email" class="form-control" placeholder="Email Address" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="reg-form" id="personaldetails">
-                        <div class="form-group">
-                            <input asp-for="PhoneNumber" class="form-control" placeholder="Contact Number" />
-                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
+                    <h2 class="fs-title">Social Profiles</h2>
+                    <h3 class="fs-subtitle">What social platforms are you on?</h3>
+                    <input type="text" name="twitter" placeholder="Twitter" />
+                    <input type="text" name="facebook" placeholder="Facebook" />
+                    <input type="text" name="gplus" placeholder="Google Plus" />
 
-                <div id="passworddetails">
-                    <p class="reg-label">Password</p>
-                    <div class="reg-form" id="personaldetails">
-                        <div class="form-group">
-                            <input asp-for="Password" class="form-control" placeholder="Password" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
+                    <h2 class="fs-title">Create your account</h2>
+                    <h3 class="fs-subtitle">Fill in your credentials</h3>
+                    <div class="form-group">
+                        <input asp-for="Email" class="form-control" name="email" placeholder="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
-                    <div class="reg-form" id="personaldetails">
-                        <div class="form-group">
-                            <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
-                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                        </div>
+
+                    <div class="form-group">
+                        <input asp-for="Password" class="form-control" name="pass" placeholder="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
-                </div>
-                <p id="terms"> By creating an account you agree to our <a href="#" class="linkdark">Terms & Privacy</a>.</p>
-                <button type="submit" class="default-button" id="registerbutton">Register</button>
+
+                    <div class="form-group">
+                        <input asp-for="ConfirmPassword" class="form-control" name="cpass" placeholder="Confirm Password" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <p id="terms"> By creating an account you agree to our <a href="#" class="linkdark">Terms & Privacy</a>.</p>
+                    <button type="submit" class="default-button" id="registerbutton">Register</button>
+                </fieldset>
             </form>
 
-        </section>
-        <p id="altreg">Alternatively:</p>
-        <section>
-            <div class="social-login">
-                <button class="loginBtn loginBtn--facebook">
-                    Login with Facebook
-                </button>
-
-                <button class="loginBtn loginBtn--google">
-                    Login with Google
-                </button>
-            </div>
-        </section>
+        </div>
     </div>
 </body>
 
