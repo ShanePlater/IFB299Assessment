@@ -3,13 +3,15 @@
 <table class="table">
     <thead>
     <tr>
-        <th></th>
+        <th>Date</th>
+        <th>Tutor</th>
+        <th>Instruments</th>
     </tr>
     </thead>
     <tbody>
     @foreach (var item in Model.Availabilities)
     {
-        <tr>
+        <tr class='clickable-row' data-href='/Lesson/Book/@item.Id'>
             <td>
                 @Html.DisplayFor(modelItem => item.DateTime)
             </td>
