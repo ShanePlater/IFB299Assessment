@@ -55,8 +55,9 @@ namespace GMS.ASPNet.Core.Controllers
 
 
 
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(string id, string returnURL)
         {
+            ViewData["ReturnUrl"] = returnURL;
             if (id == null)
                 return NotFound();
 
