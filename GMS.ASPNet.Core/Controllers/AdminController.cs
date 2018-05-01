@@ -36,7 +36,7 @@ namespace GMS.ASPNet.Core.Controllers
             else if (Request.Query["Action"] == "Revoke")
                 user.IsTeacher = false;
             await _dataContext.SaveChangesAsync();
-            return RedirectToAction("List", "Account");
+            return RedirectToAction("ListUsers", "Admin");
         }
 
         public async Task<IActionResult> GrantAdmin()
@@ -52,7 +52,7 @@ namespace GMS.ASPNet.Core.Controllers
         }
 
         public async Task<IActionResult> EditUser(string id)
-        {
+        {// need to change this to reroute to accountcontroller edit
             if (id == null)
                 return NotFound();
 
