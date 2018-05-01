@@ -1,0 +1,78 @@
+﻿@model IEnumerable<GMS.Data.Models.AppUser>
+
+@{
+    ViewData["Title"] = "View Users";
+}
+
+<h2>ViewUsers</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Select
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <input type="submit" value="View User" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+First Name:
+@*@Html.TextBoxFor(m => m.StudentName, new { @class = "form-control" })   *@ <br /><br />
+Last Name:  <br /><br />
+Email Address:  <br /><br />
+Date Of Birth:  <br /><br />
+Contact Number:  <br /><br />
+
+@*<a asp-action="Edit" asp-route-id="@item.Id">Save</a> *@
+<a asp-action="Index" asp-controller="Admin">Save</a><br />
+<a asp-action="Index" asp-controller="Admin">Back</a><br />
+<input type="submit" value="Save" />
+<input type="submit" value="Back" />
+
+@*
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EmailConfirmed)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PhoneNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PhoneNumberConfirmed)
+    </td>
+    <td>
+        @using (Html.BeginForm("GrantTeacher", "Admin", FormMethod.Get))
+        {
+            <input type="hidden" name="Action" value="@(item.IsTeacher ? "Revoke" : "Grant" )" />
+            <input type="hidden" name="UserId" value="@item.Id" />
+            <input type="submit" value="@(item.IsTeacher ? "Revoke Teacher" : "Grant Teacher")" />
+        }
+    </td>
+    <td>
+        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+    </td>
+*@

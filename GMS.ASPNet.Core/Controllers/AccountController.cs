@@ -53,43 +53,9 @@ namespace GMS.ASPNet.Core.Controllers
             return RedirectToAction("Login", "Session");
         }
 
-        public async Task<IActionResult> List()
-        {
-            return View(await _dataContext.Users.ToListAsync());
-        }
+        
 
-        public async Task<IActionResult> Edit(string id)
-        {
-            if (id == null)
-                return NotFound();
-
-            var user = await _dataContext.Users.SingleOrDefaultAsync(u => u.Id == new Guid(id));
-
-            if (user == null)
-                return NotFound();
-
-            return View(user);
-        }
-
-        [HttpPost, ActionName("Edit")]
-        public async Task<IActionResult> EditPost(string id)
-        {
-            if (id == null)
-                return NotFound();
-
-            var user = await _dataContext.Users.SingleOrDefaultAsync(u => u.Id == new Guid(id));
-
-            if (user == null)
-                return NotFound();
-
-            if (await TryUpdateModelAsync(user))
-            {
-                await _dataContext.SaveChangesAsync();
-                ViewData["Status"] = "Changes Saved";
-            }
-
-            return View(user);
-        }
+       
 
 
 

@@ -12,7 +12,7 @@ using System;
 namespace GMS.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180430105717_initial")]
+    [Migration("20180501061837_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

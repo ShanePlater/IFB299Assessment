@@ -110,7 +110,7 @@ namespace GMS.ASPNet.Core
                 routes.MapRoute(
                     name: "admin-users",
                     template: "Admin/Users/List",
-                    defaults: new {controller = "Account", action = "List"});
+                    defaults: new {controller = "Admin", action = "List"});
 
                 routes.MapRoute(
                     name: "default",
