@@ -23,10 +23,13 @@ namespace GMS.ASPNet.Core.Models.SessionViewModels
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        [Required]
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Contact Number")]
         public string PhoneNumber { get; set; }
 
+
+        [Required]
         [Display(Name = "Address")]
         public string Address { get; set; }
 
