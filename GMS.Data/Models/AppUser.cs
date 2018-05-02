@@ -11,14 +11,10 @@ namespace GMS.Data.Models
     /// </summary>
     public class AppUser : IdentityUser<Guid>
     {
-        [Display(Name = "First Name")]
+
         public string FirstName { get; set; }
 
-        [Display(Name = "Last Name")]
         public string LastName { get; set; }
-
-        [Display(Name = "Teacher")]
-        public bool IsTeacher { get; set; }
 
         public List<InstumentType> Instruments { get; set; }
 

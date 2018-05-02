@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GMS.ASPNet.Core.Models.AccountViewModels;
 using GMS.Data;
 using GMS.Data.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -17,43 +18,65 @@ namespace GMS.ASPNet.Core.Controllers
     {
         private readonly DataContext _dataContext;
         private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<IdentityRole<Guid>> _roleManager;
 
-        public AdminController(DataContext dataContext, UserManager<AppUser> userManager)
+        public AdminController(DataContext dataContext, UserManager<AppUser> userManager, RoleManager<IdentityRole<Guid>> roleManager)
         {
             _dataContext = dataContext;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
+        /// <summary>
+        /// Admin Home page
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View();
         }
 
-        public async Task<IActionResult> GrantTeacher()
+        /// <summary>
+        /// Backend action to grant roles to users
+        /// </summary>
+        /// <param name="id">Name of the role to be granted</param>
+        /// <returns></returns>
+        public async Task<IActionResult> Grant(string id)
         {
-            var user = await _dataContext.Users.FindAsync(new Guid(Request.Query["UserId"]));
-            if (Request.Query["Action"] == "Grant")
-                user.IsTeacher = true;
-            else if (Request.Query["Action"] == "Revoke")
-                user.IsTeacher = false;
-            await _dataContext.SaveChangesAsync();
-            return RedirectToAction("ListUsers", "Admin");
+            if (!await _roleManager.Roles.AnyAsync(role => role.NormalizedName == id.ToUpperInvariant()))
+                return NotFound();
+
+            if (!User.IsInRole(id))
+                await _userManager.AddToRoleAsync(await _userManager.GetUserAsync(User), id);
+
+            return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> GrantAdmin()
-        {
-            if (!User.IsInRole("Administrator"))
-                await _userManager.AddToRoleAsync(await _userManager.GetUserAsync(User), "Administrator");
 
-            return View();
-        }
-        public async Task<IActionResult> ListUsers()
+        public async Task<IActionResult> UserList()
         {
-            return View(await _dataContext.Users.ToListAsync());
+            var userVms = new List<UserViewModel>();
+
+            foreach (var user in _dataContext.Users)
+            {
+                var userVm = new UserViewModel()
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    UserName = user.UserName,
+                    IsTeacher = await _userManager.IsInRoleAsync(user, "Teacher"),
+                    IsAdmin = await _userManager.IsInRoleAsync(user, "Administrator"),
+                };
+                userVms.Add(userVm);
+            }
+
+            return View(userVms);
         }
 
         public async Task<IActionResult> EditUser(string id, string returnURL)
-        {// need to change this to reroute to accountcontroller edit
+        {
             return RedirectToAction("Edit", new RouteValueDictionary(new { controller = "Account", action = "Edit", Id = id, returnUrl = returnURL}));
         }
        

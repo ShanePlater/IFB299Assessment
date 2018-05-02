@@ -55,9 +55,9 @@ namespace GMS.ASPNet.Core.Controllers
 
 
 
-        public async Task<IActionResult> Edit(string id, string returnURL)
+        public async Task<IActionResult> Edit(string id, string returnUrl = null)
         {
-            ViewData["ReturnUrl"] = returnURL;
+            ViewData["ReturnUrl"] = returnUrl;
             if (id == null)
                 return NotFound();
 
@@ -136,7 +136,7 @@ namespace GMS.ASPNet.Core.Controllers
                 await _roleManager.CreateAsync(role);
             }
 
-            ViewData["Status"] = "Users Created";
+            ViewData["Status"] = "Roles Created";
             return View();
         }
     }
