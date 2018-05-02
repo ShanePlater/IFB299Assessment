@@ -16,6 +16,8 @@ namespace GMS.Data.Models
 
         public string LastName { get; set; }
 
+        public string Address { get; set; }
+
         public List<InstumentType> Instruments { get; set; }
 
         [InverseProperty("TaughtTo")]

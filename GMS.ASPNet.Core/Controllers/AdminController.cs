@@ -59,25 +59,18 @@ namespace GMS.ASPNet.Core.Controllers
 
             foreach (var user in _dataContext.Users)
             {
-                var userVm = new UserViewModel()
-                {
-                    Id = user.Id,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Email = user.Email,
-                    UserName = user.UserName,
-                    IsTeacher = await _userManager.IsInRoleAsync(user, "Teacher"),
-                    IsAdmin = await _userManager.IsInRoleAsync(user, "Administrator"),
-                };
+                var userVm = new UserViewModel(user);
+                //await userVm.GetRoles();
+
                 userVms.Add(userVm);
             }
 
             return View(userVms);
         }
 
-        public async Task<IActionResult> EditUser(string id, string returnURL)
+        public async Task<IActionResult> EditUser(string id, string returnUrl)
         {
-            return RedirectToAction("Edit", new RouteValueDictionary(new { controller = "Account", action = "Edit", Id = id, returnUrl = returnURL}));
+            return RedirectToAction("Edit", new RouteValueDictionary(new { controller = "Account", action = "Edit", Id = id, returnUrl = returnUrl}));
         }
        
 

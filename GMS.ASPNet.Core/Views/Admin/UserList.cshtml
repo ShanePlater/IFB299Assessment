@@ -61,7 +61,7 @@
                 @Html.DisplayFor(mItem => item.IsAdmin)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditUser", "Admin", new { id = item.Id, @returnUrl = Url.Action(ViewContext.RouteData.Values["Action"].ToString(), ViewContext.RouteData.Values["Controller"].ToString()) })
+                <a asp-action="Edit" asp-route-id="@item.Id" asp-route-returnUrl="@ViewData["returnUrl"]">Delete</a>
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>

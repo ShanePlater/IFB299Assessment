@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using GMS.ASPNet.Core.Models.AccountViewModels;
 using GMS.Data;
 using GMS.Data.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -53,8 +54,6 @@ namespace GMS.ASPNet.Core.Controllers
             return RedirectToAction("Login", "Session");
         }
 
-
-
         public async Task<IActionResult> Edit(string id, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -66,32 +65,34 @@ namespace GMS.ASPNet.Core.Controllers
             if (user == null)
                 return NotFound();
 
-            return View(user);
+            var userVm = new UserViewModel(user);
+            await GetRoles(user, userVm);
+            return View(userVm);
         }
 
         [HttpPost, ActionName("Edit")]
-        public async Task<IActionResult> EditPost(string id, string returnUrl)
+        public async Task<IActionResult> EditPost(UserViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            if (id == null)
+            if (model == null)
                 return NotFound();
 
-            var user = await _dataContext.Users.SingleOrDefaultAsync(u => u.Id == new Guid(id));
-
+            var user = await _dataContext.Users.SingleOrDefaultAsync(u => u.Id == model.Id);
+            var userVm = new UserViewModel(user);
             if (user == null)
                 return NotFound();
 
-            if (await TryUpdateModelAsync(user))
+            if (ModelState.IsValid)
             {
+                UpdateValues(user, model);
+                await SetRoles(user, model);
+
                 await _dataContext.SaveChangesAsync();
                 ViewData["Status"] = "Changes Saved";
             }
 
-            return View(user);
+            return View(model);
         }
-
-
-
 
 
         /// <summary>
@@ -139,6 +140,39 @@ namespace GMS.ASPNet.Core.Controllers
 
             ViewData["Status"] = "Roles Created";
             return View();
+        }
+
+
+        public async Task<bool> SetRoles(AppUser user, UserViewModel model)
+        {
+            if (model.IsTeacher)
+                await _userManager.AddToRoleAsync(user, "Teacher");
+            else
+                await _userManager.RemoveFromRoleAsync(user, "Teacher");
+
+            if (model.IsAdmin)
+                await _userManager.AddToRoleAsync(user, "Administrator");
+            else
+                await _userManager.RemoveFromRoleAsync(user, "Administrator");
+
+            return true;
+        }
+
+
+        public void UpdateValues(AppUser user, UserViewModel model)
+        {
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.Email = model.Email;
+            user.Address = model.Address;
+            user.PhoneNumber = model.PhoneNumber;
+        }
+
+        public async Task<bool> GetRoles(AppUser user, UserViewModel model)
+        {
+            model.IsTeacher = await _userManager.IsInRoleAsync(user, "Teacher");
+            model.IsAdmin = await _userManager.IsInRoleAsync(user, "Administrator");
+            return true;
         }
     }
 }

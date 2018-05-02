@@ -12,8 +12,8 @@ using System;
 namespace GMS.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20180502004925_remove-isteacher")]
-    partial class removeisteacher
+    [Migration("20180502014238_address")]
+    partial class address
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,6 +28,8 @@ namespace GMS.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("Address");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
