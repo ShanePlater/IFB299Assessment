@@ -17,9 +17,6 @@ namespace GMS.Data.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Display(Name = "Teacher")]
-        public bool IsTeacher { get; set; }
-
         public List<InstumentType> Instruments { get; set; }
 
         [InverseProperty("TaughtTo")]

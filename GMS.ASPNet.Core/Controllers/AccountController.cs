@@ -70,8 +70,9 @@ namespace GMS.ASPNet.Core.Controllers
         }
 
         [HttpPost, ActionName("Edit")]
-        public async Task<IActionResult> EditPost(string id)
+        public async Task<IActionResult> EditPost(string id, string returnUrl)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             if (id == null)
                 return NotFound();
 
