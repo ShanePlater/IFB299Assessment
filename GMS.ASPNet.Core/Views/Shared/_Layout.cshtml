@@ -75,28 +75,39 @@ else
         <footer class="flex-rw" id="footer">
             <ul class="footer-list-top">
                 <li><h4 class="footer-list-header" asp-area="" asp-controller="Home" asp-action="Services"> Services</h4></li>
-                <li><a class="generic-anchor footer-list-anchor"> Instrumental Lessons</a></li>
-                <li><a class="generic-anchor footer-list-anchor"> Music Theory</a></li>
-                <li><a class="generic-anchor footer-list-anchor"> Other Services</a></li>
+                <li><a class="generic-anchor footer-list-anchor linkdark"> Instrumental Lessons</a></li>
+                <li><a class="generic-anchor footer-list-anchor linkdark"> Music Theory</a></li>
+                <li><a class="generic-anchor footer-list-anchor linkdark"> Other Services</a></li>
             </ul>
             <ul class="footer-list-top">
                 <li><h4 class="footer-list-header" asp-area="" asp-controller="Home" asp-action="About"> About Us </h4></li>
-                <li><a class="generic-anchor footer-list-anchor"> Our Story</a></li>
+                <li><a class="generic-anchor footer-list-anchor linkdark"> Our Story</a></li>
             </ul>
             <ul class="footer-list-top">
                 <li><h4 class="footer-list-header" asp-area="" asp-controller="Home" asp-action="Contact">Contact</h4></li>
-                <li><a class="generic-anchor footer-list-anchor" asp-area="" asp-controller="Home" asp-action="Contact"> Contact Us</a></li>
-                <li><a class="generic-anchor footer-list-anchor"> FAQ</a></li>
+                <li><a class="generic-anchor footer-list-anchor linkdark" asp-area="" asp-controller="Home" asp-action="Contact"> Contact Us</a></li>
+                <li><a class="generic-anchor footer-list-anchor linkdark"> FAQ</a></li>
             </ul>
             <ul class="footer-list-top">
                 <li><h4 class="footer-list-header" asp-area="" asp-controller="Home" asp-action="Legal"> Legal</h4></li>
-                <li><a class="footer-list-anchor"> Terms of Use</a></li>
-                <li><a class="footer-list-anchor"> Privacy and Policy</a></li>
+                <li><a class="footer-list-anchor linkdark"> Terms of Use</a></li>
+                <li><a class="footer-list-anchor linkdark"> Privacy and Policy</a></li>
             </ul>
             <ul class="footer-list-top">
                 <li>
-                    <h4 class="footer-list-header">Connect With Us</h4>
-                    <section class="footer-social-section flex-rw"></section>
+                    <h4 class="footer-list-header"> Connect With Us</h4>
+                <li>
+                    <section id="lab_social_icon_footer">
+                        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+                        <div class="container-social">
+                            <div class="text-center center-block">
+                                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><i id="social-fb" class="fa fa-facebook-square fa-3x social linkdark"></i></a>
+                                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><i id="social-tw" class="fa fa-twitter-square fa-3x social linkdark"></i></a>
+                                <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><i id="social-gp" class="fa fa-google-plus-square fa-3x social linkdark"></i></a>
+                                <a href="~/Views/Home/Contact.cshtml"><i id="social-em" class="fa fa-envelope-square fa-3x social linkdark"></i></a>
+                            </div>
+                        </div>
+                    </section>
                 </li>
             </ul>
         </footer>

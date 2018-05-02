@@ -1,5 +1,7 @@
 ﻿                                                     /* SHARED PAGES */
-
+a {
+    color: white;
+}
 /*NAV BAR*/
 .flex-rw {
     display: flex;
@@ -40,16 +42,8 @@ bottom: 0;
 }*/
 
 .generic-anchor {
-    color: $primary-light-blue;
+    color: white;
     text-align: left
-}
-
-&:visited {
-    color: $primary-light-blue
-}
-
-&:hover {
-    color: $primary-line-color
 }
 
 .footer-list-top {
@@ -70,8 +64,36 @@ bottom: 0;
 .footer-list-anchor {
     font: 12px "Times New Roman", Times, serif;
     text-align: left;
+    color
+}
+#lab_social_icon_footer {
+  padding: 40px 0;
+  background-color: #dedede;
 }
 
+#lab_social_icon_footer a {
+  color: #333;
+}
+
+#lab_social_icon_footer .social:hover {
+  -webkit-transform: scale(1.1);
+  -moz-transform: scale(1.1);
+  -o-transform: scale(1.1);
+}
+
+#lab_social_icon_footer .social {
+  -webkit-transform: scale(0.8);
+  /* Browser Variations: */
+  
+  -moz-transform: scale(0.8);
+  -o-transform: scale(0.8);
+  -webkit-transition-duration: 0.5s;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+}
+.container-social{
+    float:left;
+}
 /* end of footer */
 
 /*body etc.*/
@@ -214,13 +236,28 @@ main {
     text-align: left;
 }
 
-#home-services p {
-    font-size: 2em;
-    padding-right: 20%;
-    padding-top: 5%;
-    line-height: 2;
-    text-align: left;
-    padding-top:40%;
+.services-img {
+    display: block;
+    width: 20%;
+    min-width:200px;
+    height: auto;
+    background-color:white;
+    padding:50px;
+    margin:2.5%;
+    float:left;
+    border-radius:20px;
+}
+
+.services-overlay {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #008CBA;
+}
+
+.services-container:hover .services-overlay {
+    opacity: 1;
 }
 
 #home-testimonials {
