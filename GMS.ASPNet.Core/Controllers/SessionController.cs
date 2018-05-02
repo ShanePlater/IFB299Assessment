@@ -75,7 +75,7 @@ namespace GMS.ASPNet.Core.Controllers
             if (!ModelState.IsValid) return View(model);
 
 
-            var user = new AppUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName};
+            var user = new AppUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, PhoneNumber = model.PhoneNumber, Address = model.Address};
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
