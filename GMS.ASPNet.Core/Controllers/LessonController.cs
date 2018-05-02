@@ -30,13 +30,12 @@ namespace GMS.ASPNet.Core.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var availabilities = await _context.Availabilities.Include(a => a.User).ThenInclude(u => u.Instruments)
-                .ToListAsync();
+            //var availabilities = await _context.Availabilities.Include(a => a.User).ThenInclude(u => u.Instruments)
+              //  .ToListAsync();
             
-            return View(new LessonsViewModel(){
-                Availabilities = availabilities
-
-            });
+            return View(
+                //new LessonsViewModel(){Availabilities = availabilities}
+                );
         }
 
         public async Task<IActionResult> Book(string id)
