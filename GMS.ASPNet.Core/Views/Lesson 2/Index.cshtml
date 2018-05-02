@@ -1,0 +1,36 @@
+﻿@model GMS.ASPNet.Core.Models.LessonsViewModel
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Tutor</th>
+        <th>Instruments</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.Availabilities)
+    {
+        <tr class='clickable-row' data-href='/Lesson/Book/@item.Id'>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FirstName)
+            </td>
+            <td>
+                <table>
+                    @foreach (var instument in item.User.Instruments)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => instument.Type)
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

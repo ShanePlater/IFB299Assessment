@@ -1,36 +1,120 @@
-﻿@model GMS.ASPNet.Core.Models.LessonsViewModel
+﻿@{
+    ViewBag.Title = "Index";
+}
 
-<table class="table">
-    <thead>
-    <tr>
-        <th>Date</th>
-        <th>Tutor</th>
-        <th>Instruments</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model.Availabilities)
-    {
-        <tr class='clickable-row' data-href='/Lesson/Book/@item.Id'>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.FirstName)
-            </td>
-            <td>
-                <table>
-                    @foreach (var instument in item.User.Instruments)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => instument.Type)
-                            </td>
-                        </tr>
+@*
+*@
+
+<div id='calendar'></div>
+
+@section Scripts{
+
+    <link href='~/css/fullcalendar.css' rel='stylesheet' />
+    <link href='~/css/scheduler.css' rel='stylesheet' />
+    <script src='~/js/moment.min.js'></script>
+    <script src='~/js/jquery.min.js'></script>
+    <script src='~/js/fullcalendar.min.js'></script>
+    <script src='~/js/scheduler.js'></script>
+
+    <script>
+
+        $('#calendar').fullCalendar({
+            defaultView: 'timelineWeek',
+            defaultDate: '2018-04-06',
+            selectable: true,
+            eventLimit: true,
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'agendaDay,agendaTwoDay,agendaWeek,month'
+            },            
+            resources: [
+                { id: 'a', title: 'Room A', eventColor: 'blue'  },
+                { id: 'b', title: 'Room B', eventColor: 'green' },
+                { id: 'c', title: 'Room C', eventColor: 'orange' },
+                { id: 'd', title: 'Room D', eventColor: 'red' }
+            ],
+            events: [
+                { id: '1', resourceId: 'a', start: '2018-04-06', end: '2018-04-08', title: 'event 1' },
+                { id: '2', resourceId: 'a', start: '2018-04-07T09:00:00', end: '2018-04-07T14:00:00', title: 'event 2' },
+                { id: '3', resourceId: 'b', start: '2018-04-07T12:00:00', end: '2018-04-08T06:00:00', title: 'event 3' },
+                { id: '4', resourceId: 'c', start: '2018-04-07T07:30:00', end: '2018-04-07T09:30:00', title: 'event 4' },
+                { id: '5', resourceId: 'd', start: '2018-04-07T10:00:00', end: '2018-04-07T15:00:00', title: 'event 5' }
+            ],
+            select: function (start, end, jsEvent, view, resource) {
+                console.log(
+                    'select',
+                    start.format(),
+                    end.format(),
+                    resource ? resource.id : '(no resource)'
+                );
+            },
+            dayClick: function (date, jsEvent, view, resource) {
+                console.log(
+                    'dayClick',
+                    date.format(),
+                    resource ? resource.id : '(no resource)'
+                );
+            }
+        });
+        @*
+        $(function () { // document ready
+            $('#calendar').fullCalendar({
+                defaultView: 'agendaDay',
+                defaultDate: '2018-05-02',
+                editable: true,
+                selectable: true,
+                eventLimit: true, // allow "more" link when too many events
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'agendaDay,agendaTwoDay,agendaWeek,month'
+                },
+                views: {
+                    agendaTwoDay: {
+                        type: 'agenda',
+                        duration: { days: 2 },
+                        // views that are more than a day will NOT do this behavior by default
+                        // so, we need to explicitly enable it
+                        groupByResource: true
+                        //// uncomment this line to group by day FIRST with resources underneath
+                        //groupByDateAndResource: true
                     }
-                </table>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+                },
+                //// uncomment this line to hide the all-day slot
+                //allDaySlot: false,
+                resources: [
+                    { id: 'a', title: 'Room A' },
+                    { id: 'b', title: 'Room B', eventColor: 'green' },
+                    { id: 'c', title: 'Room C', eventColor: 'orange' },
+                    { id: 'd', title: 'Room D', eventColor: 'red' }
+                ],
+                events: [
+                    { id: '1', resourceId: 'a', start: '2018-04-06', end: '2018-04-08', title: 'event 1' },
+                    { id: '2', resourceId: 'a', start: '2018-04-07T09:00:00', end: '2018-04-07T14:00:00', title: 'event 2' },
+                    { id: '3', resourceId: 'b', start: '2018-04-07T12:00:00', end: '2018-04-08T06:00:00', title: 'event 3' },
+                    { id: '4', resourceId: 'c', start: '2018-04-07T07:30:00', end: '2018-04-07T09:30:00', title: 'event 4' },
+                    { id: '5', resourceId: 'd', start: '2018-04-07T10:00:00', end: '2018-04-07T15:00:00', title: 'event 5' }
+                ],
+                select: function (start, end, jsEvent, view, resource) {
+                    console.log(
+                        'select',
+                        start.format(),
+                        end.format(),
+                        resource ? resource.id : '(no resource)'
+                    );
+                },
+                dayClick: function (date, jsEvent, view, resource) {
+                    console.log(
+                        'dayClick',
+                        date.format(),
+                        resource ? resource.id : '(no resource)'
+                    );
+                }
+            });
+
+        });
+        *@
+    </script>
+}
+
