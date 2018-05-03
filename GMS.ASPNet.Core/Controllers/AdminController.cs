@@ -104,7 +104,7 @@ namespace GMS.ASPNet.Core.Controllers
             {
                 FirstName = "Aadil",
                 LastName = "Abdullah",
-                Email = "avinkavish@gmail.com",
+                Email = "aadil@gmail.com",
                 UserName = "aadil",
                 Instruments = new List<InstumentType>()
                 {

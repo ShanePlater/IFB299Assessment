@@ -60,7 +60,11 @@ namespace GMS.ASPNet.Core.Controllers
             if (id == null)
                 return NotFound();
 
-            var user = await _dataContext.Users.SingleOrDefaultAsync(u => u.Id == new Guid(id));
+            var user = await _dataContext.Users.Include(u => u.Instruments)
+                                                .Include(u => u.Availabilities)
+                                                .Include(u => u.LessonsTaken)
+                                                .Include(u => u.LessonsTaught)
+                                                .FirstOrDefaultAsync(u => u.Id == new Guid(id));
 
             if (user == null)
                 return NotFound();

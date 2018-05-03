@@ -16,7 +16,8 @@ namespace GMS.Data.Models
 
         public AppUser User { get; set; }
 
-        [DataType(DataType.Date)]
+        public long DurationTicks { get; set; }
+
         public DateTime DateTime { get; set; }
     }
 }

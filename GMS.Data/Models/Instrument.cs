@@ -16,6 +16,5 @@ namespace GMS.Data.Models
 
         public string Description { get; set; } = "Dat badass violin";
 
-
     }
 }
