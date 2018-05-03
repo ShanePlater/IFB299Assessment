@@ -61,7 +61,7 @@
                 @Html.DisplayFor(mItem => item.IsAdmin)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" asp-route-returnUrl="@ViewData["returnUrl"]">Delete</a>
+                <a asp-action="EditUser" asp-route-id="@item.Id" asp-route-returnUrl="@ViewData["returnUrl"]">Edit</a>
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>

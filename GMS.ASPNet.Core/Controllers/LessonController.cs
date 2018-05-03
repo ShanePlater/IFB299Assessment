@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,8 +32,8 @@ namespace GMS.ASPNet.Core.Controllers
         public async Task<IActionResult> Index()
         {
             //var availabilities = await _context.Availabilities.Include(a => a.User).ThenInclude(u => u.Instruments)
-              //  .ToListAsync();
-            
+            //  .ToListAsync();
+
             return View(
                 //new LessonsViewModel(){Availabilities = availabilities}
                 );
@@ -51,5 +52,20 @@ namespace GMS.ASPNet.Core.Controllers
 
             return View(bookVm);
         }
-}
+
+        public async Task<string> getAvailabilities()
+        {
+            // Read each record and make JSON string
+            // { id: 'a', title: 'Room A', eventColor: 'blue' }
+
+            var jsonString ="[";
+            foreach (var a in _context.Availabilities.Include(a => a.User).ThenInclude(u => u.Instruments))
+            {
+                //start time, end time, 
+                jsonString += $"{{ id: '{a.Id}', title: '{a.User.FirstName} {a.User.LastName}', start: '{a.StartTime}', end: '{a.EndTime}', eventColor: 'blue'}},";
+            }
+            return jsonString + "]";     
+            
+        }
+    }
 }

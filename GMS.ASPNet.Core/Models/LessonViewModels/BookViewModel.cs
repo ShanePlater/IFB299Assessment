@@ -21,11 +21,11 @@ namespace GMS.ASPNet.Core.Models.LessonViewModels
         public string TeacherName => _availability.User.FirstName + " " + _availability.User.LastName;
 
         [DataType(DataType.Date)]
-        public DateTime Date => _availability.DateTime.Date;
+        public DateTime Date => _availability.StartTime.Date;
 
 
         [DataType(DataType.Time)]
-        public DateTime Time => _availability.DateTime;
+        public DateTime Time => _availability.StartTime;
 
 
         public List<SelectListItem> Instruments => _availability.User.Instruments

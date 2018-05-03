@@ -14,17 +14,10 @@ namespace GMS.ASPNet.Core.Models.LessonViewModels
 
         public Guid UserId { get; set; }
 
-        public AppUser User { get; set; }
+        public AppUser User { get; set; }    
 
-        public TimeSpan Duration
-        {
-            get => new TimeSpan(_durationTicks);
-            set => _durationTicks = value.Ticks;
-        }
+        public DateTime StartTime { get; set; }
 
-        private long _durationTicks;
-
-        [DataType(DataType.Date)]
-        public DateTime DateTime { get; set; }
+        public DateTime EndTime { get; set; }
     }
 }

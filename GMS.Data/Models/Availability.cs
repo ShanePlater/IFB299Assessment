@@ -18,6 +18,8 @@ namespace GMS.Data.Models
 
         public long DurationTicks { get; set; }
 
-        public DateTime DateTime { get; set; }
+        public DateTime StartTime { get; set; }
+
+        public DateTime EndTime { get; set; }
     }
 }
