@@ -53,19 +53,76 @@ namespace GMS.ASPNet.Core.Controllers
             return View(bookVm);
         }
 
-        public async Task<string> getAvailabilities()
+        public IActionResult getTeachers()
         {
             // Read each record and make JSON string
             // { id: 'a', title: 'Room A', eventColor: 'blue' }
 
-            var jsonString ="[";
+            var jsonString = "[";
             foreach (var a in _context.Availabilities.Include(a => a.User).ThenInclude(u => u.Instruments))
             {
                 //start time, end time, 
-                jsonString += $"{{ id: '{a.Id}', title: '{a.User.FirstName} {a.User.LastName}', start: '{a.StartTime}', end: '{a.EndTime}', eventColor: 'blue'}},";
+                jsonString += $"{{ \"id\": \"{a.UserId.ToString().Substring(0, 3)}\", \"title\" : \"{a.User.FirstName} {a.User.LastName}\", \"color\" : \"blue\" }}";
+                //jsonString += $"{{ \"id\": \"{a.Id.ToString().Substring(0, 3)}\", \"title\" : \"{a.User.FirstName} {a.User.LastName}\", \"color\" : \"blue\" }},";
             }
-            return jsonString + "]";     
             
+            return Content(jsonString + "]", "application/json");
+
         }
+
+        public IActionResult getAvailabilities()
+        {
+            // Read each record and make JSON string
+            // { id: 'a', title: 'Room A', eventColor: 'blue' }
+
+            var jsonString = "[";
+            foreach (var a in _context.Availabilities.Include(a => a.User).ThenInclude(u => u.Instruments))
+            {
+                //tempString = $"{{id: '{a.Id.ToString().Substring(0, 3)}', resourceId: {a.UserId.ToString().Substring(30)}, start: '{a.StartTime:o}', end: '{a.EndTime:o}'}}, ";
+                jsonString += $"{{ \"id\": \"{a.Id.ToString().Substring(0, 3)}\", \"resourceId\" : \"{a.UserId.ToString().Substring(0, 3)}\",  \"start\" : \"{a.StartTime:o}\", \"end\": \"{a.EndTime:o}\"}}";
+            }
+
+            return Content(jsonString + "]", "application/json");
+
+        }
+        /*
+
+        [HttpGet]
+        public JsonResult getTeachers()
+        {          
+
+            
+            var tempString = "";
+            var temp = new List<string>();
+
+            foreach (var a in _context.Availabilities.Include(a => a.User).ThenInclude(u => u.Instruments))
+            {
+                //start time, end time, 
+                tempString = $"{{id: '{a.UserId.ToString().Substring(0, 3)}', title: '{a.User.FirstName} {a.User.LastName}', allDay: false, eventColor: 'blue'}}";
+                temp.Add(tempString);
+            }
+            return new JsonResult { Data = temp, JsonRequestBehaviour = JsonRequestBehaviour.AllowGet };
+
+        }
+
+        [HttpGet]
+        public JsonResult getAvailabilities()
+        {
+           
+
+
+            var tempString = "";
+            var temp = new List<string>();
+
+            foreach (var a in _context.Availabilities.Include(a => a.User).ThenInclude(u => u.Instruments))
+            {
+                //start time, end time, 
+                tempString = $"{{id: '{a.Id.ToString().Substring(0, 3)}', resourceId: {a.UserId.ToString().Substring(30)}, start: '{a.StartTime:o}', end: '{a.EndTime:o}'}}, ";
+                temp.Add(tempString);
+            }
+            return Json(temp);
+
+        }
+        */
     }
 }

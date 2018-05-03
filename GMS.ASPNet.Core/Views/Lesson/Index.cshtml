@@ -2,8 +2,7 @@
     ViewBag.Title = "Index";
 }
 
-@*
-*@
+
 
 <div id='calendar'></div>
 
@@ -16,31 +15,36 @@
     <script src='~/lib/fullcalendar/js/fullcalendar.min.js'></script>
     <script src='~/lib/fullcalendar/js/scheduler.js'></script>
 
-    <script>
+    <script>       
+            $('#calendar').fullCalendar({
 
-        $('#calendar').fullCalendar({          
-            
-            defaultView: 'timelineWeek',            
-            selectable: true,
-            eventLimit: true,
+                defaultView: 'timelineWeek',
 
-            header: {
-                left: 'prev,next,today',
-                center: 'title',
-                right: 'timelineDay,timelineWeek,timelineMonth'
-            },
+                selectable: true,
+                eventLimit: true,
+
+                header: {
+                    left: 'prev,next,today',
+                    center: 'title',
+                    right: 'timelineDay,timelineWeek,timelineMonth'
+                },
+
+                //resources:'/lesson/getTeachers',
+                resources: {
+                    url: '/lesson/getTeachers',
+                    error: function () {
+                        alert('there was an error while fetching events!');
+                    }
+                },
+                events: {
+                    url: '/lesson/getAvailabilities',
+                    error: function () {
+                        alert('there was an error while fetching events!');
+                    }
+                }
+
+
             @*
-            resources: [
-                // list of teachers
-
-                { id: 'a', title: 'Room A', eventColor: 'blue' },
-                { id: 'b', title: 'Room B', eventColor: 'green' },
-                { id: 'c', title: 'Room C', eventColor: 'orange' },
-                { id: 'd', title: 'Room D', eventColor: 'red' }
-            ],
-                *@
-            events: '/lesson/getAvailabilities',   
-            
             select: function (start, end, jsEvent, view, resource) {
                 console.log(
                     'select',
@@ -57,7 +61,10 @@
                     resource ? resource.id : '(no resource)'
                 );
             }
-        });       
+                *@
+            });
+        
+        
     </script>
 }
 
