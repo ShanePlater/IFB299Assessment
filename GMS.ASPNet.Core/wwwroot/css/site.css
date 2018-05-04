@@ -1,7 +1,4 @@
 ﻿                                                     /* SHARED PAGES */
-a {
-    color: white;
-}
 /*NAV BAR*/
 .flex-rw {
     display: flex;
@@ -163,7 +160,7 @@ main {
     color: dimgray;
 }
 
-    .linkdark:hover {
+.linkdark:hover {
         color: white;
     }
 

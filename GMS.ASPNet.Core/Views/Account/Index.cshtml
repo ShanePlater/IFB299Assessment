@@ -1,53 +1,53 @@
-﻿@model GMS.Data.Models.AppUser
+﻿@model GMS.ASPNet.Core.Models.AccountViewModels.UserViewModel
+@section Css
+{
+    <link href="@Url.Content("~/css/account.css")" rel="stylesheet" type="text/css"/>
+}
 
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>View</title>
-</head>
-<body>
-
-        <div class="container">
-                
-            <div>
-                <h2>User</h2>
-            <hr />
-                <dl class="dl-horizontal">
-             
-        <dt>
-            <font size="3">@Html.DisplayNameFor(model => model.FirstName)</font>
-        </dt>
-        <dd>
-            <font size="3">@Html.DisplayFor(model => model.FirstName)</font>
-        </dd>
-        <dt>
-            <font size="3">@Html.DisplayNameFor(model => model.LastName)</font>
-        </dt>
-        <dd>
-            <font size="3">@Html.DisplayFor(model => model.LastName)</font>
-        </dd>
-        <dt>
-            <font size="3">@Html.DisplayNameFor(model => model.UserName)</font>
-        </dt>
-        <dd>
-            <font size="3">@Html.DisplayFor(model => model.UserName)</font>
-        </dd>
-        <dt>
-            <font size="3">@Html.DisplayNameFor(model => model.Email)</font>
-        </dt>
-        <dd>
-            <font size="3">@Html.DisplayFor(model => model.Email)</font>
-        </dd> 
-                       
-    </dl>
+<div class="container account-details">
+    <div>
+        <h2 class="display-4">My Account</h2>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+        </dl>
+    </div>
 </div>
-            </div>
-           
 <div>
-    @Html.ActionLink("Edit", "Edit", "Account", new { id = Model.Id, @returnUrl = Url.Action(ViewContext.RouteData.Values["Action"].ToString(), ViewContext.RouteData.Values["Controller"].ToString()) })    
+    @Html.ActionLink("Edit", "Edit", "Account", new { id = Model.Id, returnUrl = Url.Action(ViewContext.RouteData.Values["Action"].ToString(), ViewContext.RouteData.Values["Controller"].ToString()) })
 </div>
-</body>
-</html>

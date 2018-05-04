@@ -1,7 +1,7 @@
 ﻿@model GMS.ASPNet.Core.Models.AccountViewModels.UserViewModel
 
 @{
-    ViewData["Title"] = "View";    
+    ViewData["Title"] = "Edit User Details";    
 }
 
 <h2>Edit</h2>
@@ -49,6 +49,13 @@
         <label asp-for="IsAdmin" class="control-label"></label>
         <input asp-for="IsAdmin" class="form-control" />
     </div>
+    @Html.ListBoxFor(model => model.SelectInstruments,
+        ViewBag.ParameterValueList as MultiSelectList,
+        new{
+            data_placeholder = "Select Options ",
+            @class = "chosen-select form-control"
+        })
+
     <div class="form-group">
         <input type="submit" value="Save" class="btn btn-default" asp-route-returnUrl=@ViewData["ReturnUrl"] />
         <Span>@ViewData["Status"]</Span>

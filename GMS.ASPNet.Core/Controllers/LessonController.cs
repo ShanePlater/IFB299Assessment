@@ -61,9 +61,7 @@ namespace GMS.ASPNet.Core.Controllers
             var jsonString = "[";
             foreach (var a in _context.Availabilities.Include(a => a.User).ThenInclude(u => u.Instruments))
             {
-                //start time, end time, 
                 jsonString += $"{{ \"id\": \"{a.UserId.ToString().Substring(0, 3)}\", \"title\" : \"{a.User.FirstName} {a.User.LastName}\", \"color\" : \"blue\" }}";
-                //jsonString += $"{{ \"id\": \"{a.Id.ToString().Substring(0, 3)}\", \"title\" : \"{a.User.FirstName} {a.User.LastName}\", \"color\" : \"blue\" }},";
             }
             
             return Content(jsonString + "]", "application/json");
@@ -78,7 +76,6 @@ namespace GMS.ASPNet.Core.Controllers
             var jsonString = "[";
             foreach (var a in _context.Availabilities.Include(a => a.User).ThenInclude(u => u.Instruments))
             {
-                //tempString = $"{{id: '{a.Id.ToString().Substring(0, 3)}', resourceId: {a.UserId.ToString().Substring(30)}, start: '{a.StartTime:o}', end: '{a.EndTime:o}'}}, ";
                 jsonString += $"{{ \"id\": \"{a.Id.ToString().Substring(0, 3)}\", \"resourceId\" : \"{a.UserId.ToString().Substring(0, 3)}\",  \"start\" : \"{a.StartTime:o}\", \"end\": \"{a.EndTime:o}\"}}";
             }
 

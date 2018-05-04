@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Threading.Tasks;
 using GMS.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GMS.ASPNet.Core.Models.AccountViewModels
 {
@@ -102,6 +103,7 @@ namespace GMS.ASPNet.Core.Models.AccountViewModels
             set => User.Address = value;
         }
 
+        public IEnumerable<SelectListItem> SelectInstruments { get; set; }
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using GMS.ASPNet.Core.Models.AccountViewModels;
 using GMS.Data;
@@ -6,6 +7,7 @@ using GMS.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -48,10 +50,14 @@ namespace GMS.ASPNet.Core.Controllers
         /// <returns>The AppUser object to be displayed by the webpage</returns>
         public async Task<IActionResult> Index()
         {
-            if (_signInManager.IsSignedIn(User))
-                return View(await _userManager.GetUserAsync(User));
+            if (!_signInManager.IsSignedIn(User))
+                return RedirectToAction("Login", "Session");
 
-            return RedirectToAction("Login", "Session");
+            var user = await _userManager.GetUserAsync(User);
+            var userVm = new UserViewModel(user);
+            ;
+            return View(userVm);
+
         }
 
         public async Task<IActionResult> Edit(string id, string returnUrl = null)
@@ -70,6 +76,16 @@ namespace GMS.ASPNet.Core.Controllers
                 return NotFound();
 
             var userVm = new UserViewModel(user);
+
+            var selectList = user.Instruments.Select(
+                type => new SelectListItem()
+                {
+                    Text = type.Type,
+                    Value = type.Type,
+                    Selected = false
+                });
+
+            userVm.SelectInstruments = selectList;
             await GetRoles(user, userVm);
             return View(userVm);
         }
