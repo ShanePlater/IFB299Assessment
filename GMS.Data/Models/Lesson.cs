@@ -4,7 +4,8 @@ using System.ComponentModel.DataAnnotations;
 namespace GMS.Data.Models
 {
     /// <summary>
-    /// Models a lesson. A lesson is conducted between a teacher and a student on a specific date for a certain duration
+    /// Models a lesson. A lesson is conducted between a teacher and a student on a specific
+    /// date for a certain duration
     /// </summary>
     public class Lesson
     {

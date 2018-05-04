@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Identity;
 
 namespace GMS.Data.Models
 {
+    /// <inheritdoc />
     /// <summary>
-    /// Application implementation of the IdentityUser class provided by the ASP Net Identity framework for user authentication. Type Guid set as primary key
+    /// Application implementation of the IdentityUser class provided by the
+    /// ASP Net Identity framework for user authentication. Type Guid set as primary key
     /// </summary>
     public class AppUser : IdentityUser<Guid>
     {
@@ -20,12 +22,15 @@ namespace GMS.Data.Models
 
         public List<InstumentType> Instruments { get; set; }
 
+        // Navigation property. Lessons taken by this user
         [InverseProperty("TaughtTo")]
         public List<Lesson> LessonsTaken { get; set; }
 
+        // Navigation property. Lessons taught by this user
         [InverseProperty("TaughtBy")]
         public List<Lesson> LessonsTaught { get; set; }
 
+        // Navigation property. Times the user is available of lessons
         public List<Availability> Availabilities { get; set; }
 
     }

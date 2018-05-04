@@ -30,14 +30,15 @@ namespace GMS.ASPNet.Core
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add GMS.Data.DataContext to servicesn as the Entity Framework Database Model and pass the MySql Connection string to it.
+            // Add GMS.Data.DataContext to servicesn as the Entity Framework Database Model
+            // and pass the MySql Connection string to it.
             services.AddDbContext<DataContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("GoogleSQLConnection")));
 
 
-            // Add GMS.Data.AppUser as the ASP Net Identity user class, passing IdentityRole<Guid> as the default user role.
-            // Pass GMS.Data.DataContext as the Entity Framework store to be used to store user details
-            // Use the default token provider to provide tokens for password reset etc....
+            // Add GMS.Data.AppUser as the ASP Net Identity user class, passing IdentityRole<Guid> as the
+            // default user role. Pass GMS.Data.DataContext as the Entity Framework store to be used to
+            // store user details Use the default token provider to provide tokens for password reset etc....
             services.AddIdentity<AppUser, IdentityRole<Guid>>().AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
 
