@@ -1,49 +1,47 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Select Lesson";
 }
 
+<div class="container">
+    <h2>Book a Lesson</h2>
+    <div class="row">
+        @*<div class="col-md-4">
+        </div>*@
+        <div class="col-md-12">
+            <div id='calendar'></div>
+        </div>
+    </div>
+</div>
 
-
-<div id='calendar'></div>
 
 @section Scripts{
 
-    <link href='~/lib/fullcalendar/css/fullcalendar.min.css' rel='stylesheet' />
-    <link href='~/lib/fullcalendar/css/scheduler.css' rel='stylesheet' />
+    <link href='~/lib/fullcalendar/css/fullcalendar.min.css' rel='stylesheet'/>
+    <link href='~/lib/fullcalendar/css/scheduler.css' rel='stylesheet'/>
     <script src='~/lib/fullcalendar/js/moment.min.js'></script>
     <script src='~/lib/fullcalendar/js/jquery.min.js'></script>
     <script src='~/lib/fullcalendar/js/fullcalendar.min.js'></script>
     <script src='~/lib/fullcalendar/js/scheduler.js'></script>
 
-    <script>       
-            $('#calendar').fullCalendar({
+    <script>
 
-                defaultView: 'timelineWeek',
+        $('#calendar').fullCalendar({
+            defaultView: 'timelineMonth',
+            schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
+            selectable: true,
+            eventLimit: true,
 
-                selectable: true,
-                eventLimit: true,
-
-                header: {
-                    left: 'prev,next,today',
-                    center: 'title',
-                    right: 'timelineDay,timelineWeek,timelineMonth'
-                },
-
-                //resources:'/lesson/getTeachers',
-                resources: {
-                    url: '/lesson/getTeachers',
-                    error: function () {
-                        alert('there was an error while fetching events!');
-                    }
-                },
-                events: {
-                    url: '/lesson/getAvailabilities',
-                    error: function () {
-                        alert('there was an error while fetching events!');
-                    }
+            header: {
+                left: 'prev,next,today',
+                center: 'title',
+                right: 'timelineDay,timelineWeek,timelineMonth'
+            },
+            events: {
+                url: '/lesson/getAvailabilities',
+                error: function() {
+                    alert('there was an error while fetching events!');
                 }
-
-
+            }
             @*
             select: function (start, end, jsEvent, view, resource) {
                 console.log(
@@ -53,7 +51,7 @@
                     resource ? resource.id : '(no resource)'
                 );
             },
-                
+
             dayClick: function (date, jsEvent, view, resource) { // when clicked route to the where the student will request the timeslot
                 console.log(
                     'dayClick',
@@ -62,9 +60,6 @@
                 );
             }
                 *@
-            });
-        
-        
+        });
     </script>
 }
-

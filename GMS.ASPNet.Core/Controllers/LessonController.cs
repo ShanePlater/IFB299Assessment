@@ -31,12 +31,7 @@ namespace GMS.ASPNet.Core.Controllers
 
         public async Task<IActionResult> Index()
         {
-            //var availabilities = await _context.Availabilities.Include(a => a.User).ThenInclude(u => u.Instruments)
-            //  .ToListAsync();
-
-            return View(
-                //new LessonsViewModel(){Availabilities = availabilities}
-                );
+            return View();
         }
 
         public async Task<IActionResult> Book(string id)
@@ -68,58 +63,11 @@ namespace GMS.ASPNet.Core.Controllers
 
         }
 
-        public IActionResult getAvailabilities()
+        public IActionResult GetAvailabilities()
         {
-            // Read each record and make JSON string
-            // { id: 'a', title: 'Room A', eventColor: 'blue' }
-
-            var jsonString = "[";
-            foreach (var a in _context.Availabilities.Include(a => a.User).ThenInclude(u => u.Instruments))
-            {
-                jsonString += $"{{ \"id\": \"{a.Id.ToString().Substring(0, 3)}\", \"resourceId\" : \"{a.UserId.ToString().Substring(0, 3)}\",  \"start\" : \"{a.StartTime:o}\", \"end\": \"{a.EndTime:o}\"}}";
-            }
-
-            return Content(jsonString + "]", "application/json");
+            return Json(FullCalendarViewModel.ToList(_context.Availabilities.Include(a => a.User)
+                .ThenInclude(u => u.Instruments)));
 
         }
-        /*
-
-        [HttpGet]
-        public JsonResult getTeachers()
-        {          
-
-            
-            var tempString = "";
-            var temp = new List<string>();
-
-            foreach (var a in _context.Availabilities.Include(a => a.User).ThenInclude(u => u.Instruments))
-            {
-                //start time, end time, 
-                tempString = $"{{id: '{a.UserId.ToString().Substring(0, 3)}', title: '{a.User.FirstName} {a.User.LastName}', allDay: false, eventColor: 'blue'}}";
-                temp.Add(tempString);
-            }
-            return new JsonResult { Data = temp, JsonRequestBehaviour = JsonRequestBehaviour.AllowGet };
-
-        }
-
-        [HttpGet]
-        public JsonResult getAvailabilities()
-        {
-           
-
-
-            var tempString = "";
-            var temp = new List<string>();
-
-            foreach (var a in _context.Availabilities.Include(a => a.User).ThenInclude(u => u.Instruments))
-            {
-                //start time, end time, 
-                tempString = $"{{id: '{a.Id.ToString().Substring(0, 3)}', resourceId: {a.UserId.ToString().Substring(30)}, start: '{a.StartTime:o}', end: '{a.EndTime:o}'}}, ";
-                temp.Add(tempString);
-            }
-            return Json(temp);
-
-        }
-        */
     }
 }
