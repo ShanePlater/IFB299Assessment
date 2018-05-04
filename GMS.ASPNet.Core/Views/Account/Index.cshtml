@@ -10,36 +10,42 @@
 </head>
 <body>
 
-<div>
-    <h4>User</h4>
-    <hr />
-    <dl class="dl-horizontal">
+        <div class="container">
+                
+            <div>
+                <h2>User</h2>
+            <hr />
+                <dl class="dl-horizontal">
+             
         <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
+            <font size="3">@Html.DisplayNameFor(model => model.FirstName)</font>
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.FirstName)
+            <font size="3">@Html.DisplayFor(model => model.FirstName)</font>
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+            <font size="3">@Html.DisplayNameFor(model => model.LastName)</font>
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.LastName)
+            <font size="3">@Html.DisplayFor(model => model.LastName)</font>
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.UserName)
+            <font size="3">@Html.DisplayNameFor(model => model.UserName)</font>
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.UserName)
+            <font size="3">@Html.DisplayFor(model => model.UserName)</font>
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Email)
+            <font size="3">@Html.DisplayNameFor(model => model.Email)</font>
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Email)
+            <font size="3">@Html.DisplayFor(model => model.Email)</font>
         </dd> 
+                       
     </dl>
 </div>
+            </div>
+           
 <div>
     @Html.ActionLink("Edit", "Edit", "Account", new { id = Model.Id, @returnUrl = Url.Action(ViewContext.RouteData.Values["Action"].ToString(), ViewContext.RouteData.Values["Controller"].ToString()) })    
 </div>
