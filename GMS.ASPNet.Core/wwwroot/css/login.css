@@ -1,0 +1,114 @@
+﻿body {
+    background-image: url(../images/guitar.jpg);
+    height: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    background-color: black;
+}
+
+.form-signin {
+    margin: 6.5% 25%;
+    width: 50%;
+    padding: 5%;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+#login-wrap-text {
+    width: 50%;
+    margin: auto;
+    overflow: hidden;
+}
+
+#login-wrap-first {
+    float: left;
+}
+
+#login-wrap-second {
+    overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 65%;
+}
+
+#no-acc {
+    padding-left: 10px;
+}
+/* Log in Buttons */
+
+/* Shared */
+.social-login {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.loginBtn {
+    box-sizing: border-box;
+    position: relative;
+    margin-bottom: 1em;
+    padding: 0 15px 0 46px;
+    border: none;
+    text-align: left;
+    line-height: 34px;
+    white-space: nowrap;
+    font-size: 16px;
+    color: #FFF;
+    width: 100%;
+}
+
+    .loginBtn:before {
+        content: "";
+        box-sizing: border-box;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 34px;
+        height: 100%;
+    }
+
+    .loginBtn:focus {
+        outline: none;
+    }
+
+    .loginBtn:active {
+        box-shadow: inset 0 0 0 32px rgba(0,0,0,0.1);
+    }
+
+
+/* Facebook */
+.loginBtn--facebook {
+    background-color: #4C69BA;
+    font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;
+    text-shadow: 0 -1px 0 #354C8C;
+}
+
+    .loginBtn--facebook:before {
+        border-right: #364e92 1px solid;
+        background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png') 6px 6px no-repeat;
+    }
+
+    .loginBtn--facebook:hover,
+    .loginBtn--facebook:focus {
+        background-color: #5B7BD5;
+    }
+
+
+/* Google */
+.loginBtn--google {
+    font-family: "Roboto", Roboto, arial, sans-serif;
+    background: #DD4B39;
+}
+
+    .loginBtn--google:before {
+        border-right: #BB3F30 1px solid;
+        background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png') 6px 6px no-repeat;
+    }
+
+    .loginBtn--google:hover,
+    .loginBtn--google:focus {
+        background: #E74B37;
+    }

@@ -1,4 +1,4 @@
-﻿.home-bg {
+﻿body {
     background-image: url(../images/piano.jpg);
     height: 100%;
     background-attachment: fixed;
@@ -7,3 +7,119 @@
     background-size: cover;
     background-color: black;
 }
+
+.home-header {
+    text-align: center;
+    color: white;
+    padding-top: 15%;
+    padding-bottom: 15%;
+}
+
+
+.title {
+    font-size: 8em;
+    color: white;
+}
+
+.slogan {
+    font-size: 2em;
+    line-height: 1;
+    padding: 5%;
+}
+
+#home-blurb {
+    height: auto;
+    background-color: white;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+    #home-blurb h2 {
+        font-size: 10em;
+        text-align: left;
+    }
+
+    #home-blurb p {
+        font-size: 2em;
+        padding-right: 20%;
+        padding-top: 5%;
+        line-height: 2;
+        text-align: left;
+    }
+
+#home-services {
+    height: auto;
+    background-color: rgba(150, 150, 150, 0.3);
+    padding-top: 5%;
+    padding-bottom: 10%;
+    padding-left: 20%;
+    padding-right: 20%;
+    color: white;
+}
+
+    #home-services h2 {
+        font-size: 10em;
+        text-align: left;
+    }
+
+.services-h4 {
+    font-size: 3em;
+    padding-right: 20%;
+    padding-top: 1.5%;
+    line-height: 2;
+    text-align: left;
+}
+
+.services-p {
+    font-size: 1.5em;
+    text-align: justify;
+    max-width: 75%;
+    text-shadow: text-shadow: 1px 1px 1px #000000;
+}
+
+
+#home-testimonials {
+    height: auto;
+    background-color: rgba(255, 255, 255, 1);
+    padding-top: 5%;
+    padding-bottom: 10%;
+    padding-left: 20%;
+    padding-right: 20%;
+    color: black;
+}
+
+    #home-testimonials h2 {
+        font-size: 8em;
+        text-align: center;
+    }
+/* Carousel Testimony homepage*/
+#carousel-testimony {
+    height: 300px;
+    width: 100%;
+    padding-bottom: 2%;
+}
+
+.carousel-content {
+    font-size: 2em;
+    line-height: 1.4;
+    text-align: center;
+    color: #262626;
+    padding-top: 5em;
+}
+
+.carousel-author {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 2em;
+    line-height: 1;
+    text-align: center;
+    color: #262626;
+}
+
+.carousel-inner {
+    height: 400px;
+    width: 100%;
+    position: relative;
+}
+

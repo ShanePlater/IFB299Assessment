@@ -7,7 +7,9 @@ using Microsoft.EntityFrameworkCore;
 namespace GMS.Data
 {
     /// <summary>
-    /// Solution implementation of Entity Framework Db context
+    /// Solution implementation of Entity Framework Identity Db context.
+    /// Uses AppUser for user accounts, type IdentityRole<Guid> for role
+    /// and Guid as Id for user
     /// </summary>
     public class DataContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
     {
@@ -27,14 +29,15 @@ namespace GMS.Data
 
 
         /// <summary>
-        /// Executed when EF is being initialised by the application
+        /// Executed when Entity Framework is being initialised by the application
+        /// This is used to build object-relational mapping and configure relationships
         /// </summary>
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Models are mapped to singular names. i.e. Student is mapped to a table named Student instead of Students
+            // Models are mapped to singular names. i.e. Lesson is mapped to a table named Lesson instead of Lessons
             modelBuilder.Entity<Lesson>().ToTable("Lesson");
             modelBuilder.Entity<Instrument>().ToTable("Instrument");
             modelBuilder.Entity<Availability>().ToTable("Availability");
@@ -47,6 +50,7 @@ namespace GMS.Data
             modelBuilder.Entity<Lesson>()
                 .HasKey(c => new { c.TaughtById, c.TaughtToId, c.DateTime });
 
+            //Composite Key for Instrument Type
             modelBuilder.Entity<InstumentType>().HasKey(i => new {i.Type, i.UserId});
 
 
