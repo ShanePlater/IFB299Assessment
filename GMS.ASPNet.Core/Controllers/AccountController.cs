@@ -66,11 +66,7 @@ namespace GMS.ASPNet.Core.Controllers
             if (id == null)
                 return NotFound();
 
-            var user = await _dataContext.Users.Include(u => u.Instruments)
-                                                .Include(u => u.Availabilities)
-                                                .Include(u => u.LessonsTaken)
-                                                .Include(u => u.LessonsTaught)
-                                                .FirstOrDefaultAsync(u => u.Id == new Guid(id));
+            var user = await GetFullUser(id);
 
             if (user == null)
                 return NotFound();
@@ -93,25 +89,40 @@ namespace GMS.ASPNet.Core.Controllers
         [HttpPost, ActionName("Edit")]
         public async Task<IActionResult> EditPost(UserViewModel model, string returnUrl = null)
         {
+            if (model == null) NotFound();
+
             ViewData["ReturnUrl"] = returnUrl;
             if (model == null)
                 return NotFound();
 
-            var user = await _dataContext.Users.SingleOrDefaultAsync(u => u.Id == model.Id);
-            var userVm = new UserViewModel(user);
+            var user = await GetFullUser(model.Id.ToString());
+
             if (user == null)
                 return NotFound();
 
-            if (ModelState.IsValid)
-            {
-                UpdateValues(user, model);
-                await SetRoles(user, model);
+            var userVm = new UserViewModel(user);
 
-                await _dataContext.SaveChangesAsync();
-                ViewData["Status"] = "Changes Saved";
-            }
+            var selectList = user.Instruments.Select(
+                type => new SelectListItem()
+                {
+                    Text = type.Type,
+                    Value = type.Type,
+                    Selected = false
+                });
 
-            return View(model);
+            userVm.SelectInstruments = selectList;
+
+            if (!ModelState.IsValid)
+                return View(userVm);
+
+            UpdateValues(user, model);
+            await SetRoles(user, model);
+            await _userManager.UpdateAsync(user);
+            await _userManager.UpdateNormalizedEmailAsync(user);
+            await _userManager.UpdateNormalizedUserNameAsync(user);
+            ViewData["Status"] = "Changes Saved";
+
+            return View(userVm);
         }
 
 
@@ -181,6 +192,9 @@ namespace GMS.ASPNet.Core.Controllers
 
         public void UpdateValues(AppUser user, UserViewModel model)
         {
+            user.UserName = model.UserName;
+            user.NormalizedUserName = model.UserName.ToUpperInvariant();
+            user.NormalizedEmail = model.Email.ToUpperInvariant();
             user.FirstName = model.FirstName;
             user.LastName = model.LastName;
             user.Email = model.Email;
@@ -193,6 +207,16 @@ namespace GMS.ASPNet.Core.Controllers
             model.IsTeacher = await _userManager.IsInRoleAsync(user, "Teacher");
             model.IsAdmin = await _userManager.IsInRoleAsync(user, "Administrator");
             return true;
+        }
+
+        private async Task<AppUser> GetFullUser(string id)
+        {
+            var user = await _dataContext.Users.Include(u => u.Instruments)
+                .Include(u => u.Availabilities)
+                .Include(u => u.LessonsTaken)
+                .Include(u => u.LessonsTaught)
+                .FirstOrDefaultAsync(u => u.Id == new Guid(id));
+            return user;
         }
     }
 }

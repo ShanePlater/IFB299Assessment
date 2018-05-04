@@ -173,15 +173,6 @@ main {
     padding-bottom: 15%;
 }
 
-.home-bg {
-    background-image: url(../images/piano.jpg);
-    height: 100%;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color:black;
-}
 
 .title {
     font-size: 8em;
@@ -327,11 +318,7 @@ main {
     width: 50%;
     padding: 5%;
     background-color: rgba(0, 0, 0, 0.1);
-}
-
-.form-group {
     color: white;
-    font: 12px "Times New Roman", Times, serif;
 }
 
 #login-wrap-text {

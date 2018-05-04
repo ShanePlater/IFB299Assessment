@@ -23,7 +23,7 @@
     </environment>
     @RenderSection("Css", required: false)
 </head>
-<body>
+<body class="home-bg">
     <nav class="navbar navbar-inverse navbar-fixed-top" id="navbar-header">
         <div class="container">
             <div class="navbar-header">
@@ -48,7 +48,7 @@
             <form asp-area="" asp-controller="Session" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a asp-area="" asp-controller="Account" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                        <a asp-area="" asp-controller="Account" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User), View Account</a>
                     </li>
                     @if (User.IsInRole("Administrator"))
                     {
@@ -73,6 +73,7 @@ else
     </nav>
     <div class="container body-content">
         @RenderBody()
+    </div>
         <footer class="flex-rw" id="footer">
             <ul class="footer-list-top">
                 <li><h4 class="footer-list-header" asp-area="" asp-controller="Home" asp-action="Services"> Services</h4></li>
@@ -112,7 +113,7 @@ else
                 </li>
             </ul>
         </footer>
-    </div>
+
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

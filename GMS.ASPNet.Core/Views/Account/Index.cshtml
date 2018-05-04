@@ -1,13 +1,20 @@
 ﻿@model GMS.ASPNet.Core.Models.AccountViewModels.UserViewModel
 @section Css
 {
-    <link href="@Url.Content("~/css/account.css")" rel="stylesheet" type="text/css"/>
+    <link href="~/css/account.css" rel="stylesheet" type="text/css"/>
 }
 
 <div class="container account-details">
     <div>
-        <h2 class="display-4">My Account</h2>
-        <hr />
+        <div class="row">
+            <div class="col-md-8">
+                <h2>
+                    My Account
+                    <small><a asp-action="Edit" asp-route-id="@Model.Id" asp-route-returnUrl="/Account">Edit</a></small>
+                </h2>
+            </div>
+        </div>
+        <hr/>
         <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.FirstName)
@@ -47,7 +54,4 @@
             </dd>
         </dl>
     </div>
-</div>
-<div>
-    @Html.ActionLink("Edit", "Edit", "Account", new { id = Model.Id, returnUrl = Url.Action(ViewContext.RouteData.Values["Action"].ToString(), ViewContext.RouteData.Values["Controller"].ToString()) })
 </div>

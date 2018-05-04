@@ -3,10 +3,6 @@
     font: 1.8em "Times New Roman", Times, serif;
 }
 
-.account-details h2 {
-    margin: inherit auto;
-}
-
 .account-details dd {
     margin: 10px ;
 }

@@ -46,7 +46,7 @@ namespace GMS.ASPNet.Core.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (!ModelState.IsValid) return View(model);
 
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+            var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
             if (result.Succeeded)
             {
                 _logger.LogInformation("User logged in.");
