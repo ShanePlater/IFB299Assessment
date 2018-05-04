@@ -36,8 +36,14 @@
                 center: 'title',
                 right: 'timelineDay,timelineWeek,timelineMonth'
             },
+            resources: {
+                url: '/lesson/getTeachers',
+                error: function() {
+                    alert('there was an error while fetching events!');
+                }
+            },
             events: {
-                url: '/lesson/getAvailabilities',
+                url: '/lesson/GetAvailabilities',
                 error: function() {
                     alert('there was an error while fetching events!');
                 }

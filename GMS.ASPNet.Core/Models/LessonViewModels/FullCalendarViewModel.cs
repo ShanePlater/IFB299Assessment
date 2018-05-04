@@ -16,6 +16,8 @@ namespace GMS.ASPNet.Core.Models.LessonViewModels
 
         public string end { get; set; }
 
+        public string resourceId { get; set; }
+
         public string color { get; set; }
 
         public static IEnumerable<FullCalendarViewModel> ToList(IEnumerable<Availability> availabilities)
@@ -25,6 +27,8 @@ namespace GMS.ASPNet.Core.Models.LessonViewModels
                 id = availability.Id.ToString(),
                 title = availability.User.ToString(),
                 start = availability.StartTime.ToString("o"),
+                end = availability.EndTime.ToString("o"),
+                resourceId = availability.UserId.ToString(),
                 color = "blue"
             });
         }

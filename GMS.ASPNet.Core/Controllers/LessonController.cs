@@ -56,7 +56,7 @@ namespace GMS.ASPNet.Core.Controllers
             var jsonString = "[";
             foreach (var a in _context.Availabilities.Include(a => a.User).ThenInclude(u => u.Instruments))
             {
-                jsonString += $"{{ \"id\": \"{a.UserId.ToString().Substring(0, 3)}\", \"title\" : \"{a.User.FirstName} {a.User.LastName}\", \"color\" : \"blue\" }}";
+                jsonString += $"{{ \"id\": \"{a.UserId.ToString()}\", \"title\" : \"{a.User.FirstName} {a.User.LastName}\", \"color\" : \"blue\" }}";
             }
             
             return Content(jsonString + "]", "application/json");

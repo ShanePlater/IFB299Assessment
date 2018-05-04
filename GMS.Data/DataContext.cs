@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GMS.Data
 {
+    /// <summary>
+    /// Solution implementation of Entity Framework Db context
+    /// </summary>
     public class DataContext : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>
     {
         /// <summary>
@@ -14,7 +17,6 @@ namespace GMS.Data
         /// <param name="options">Options for Database Model such as the Connection String</param>
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
-
         }
 
         public DbSet<Availability> Availabilities { get; set; }
