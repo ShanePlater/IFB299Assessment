@@ -30,7 +30,7 @@ namespace GMS.ASPNet.Core.Controllers
         /// <summary>
         /// Admin Home page
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Home Page</returns>
         public IActionResult Index()
         {
             return View();
@@ -40,7 +40,7 @@ namespace GMS.ASPNet.Core.Controllers
         /// Backend action to grant roles to users
         /// </summary>
         /// <param name="id">Name of the role to be granted</param>
-        /// <returns></returns>
+        /// <returns>Home Page</returns>
         public async Task<IActionResult> Grant(string id)
         {
             if (!await _roleManager.Roles.AnyAsync(role => role.NormalizedName == id.ToUpperInvariant()))

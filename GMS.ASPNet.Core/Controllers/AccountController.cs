@@ -59,7 +59,13 @@ namespace GMS.ASPNet.Core.Controllers
             return View(userVm);
 
         }
-
+        
+        /// <summary>
+        /// Displays a view to edit a user account
+        /// </summary>
+        /// <param name="id">Id of the User to edit</param>
+        /// <param name="returnUrl">Page to redirect to after editing</param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(string id, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -73,6 +79,7 @@ namespace GMS.ASPNet.Core.Controllers
 
             var userVm = new UserViewModel(user);
 
+            // Make UI component of Instrument Types
             var selectList = user.Instruments.Select(
                 type => new SelectListItem()
                 {
@@ -86,6 +93,12 @@ namespace GMS.ASPNet.Core.Controllers
             return View(userVm);
         }
 
+        /// <summary>
+        /// Save edits to a user account
+        /// </summary>
+        /// <param name="model">ViewModel containting updated user data</param>
+        /// <param name="returnUrl">Page to redirect to after edit is complete</param>
+        /// <returns></returns>
         [HttpPost, ActionName("Edit")]
         public async Task<IActionResult> EditPost(UserViewModel model, string returnUrl = null)
         {
@@ -126,10 +139,7 @@ namespace GMS.ASPNet.Core.Controllers
         }
 
 
-        /// <summary>
-        /// Backend action to create roles
-        /// </summary>
-        /// <returns></returns>
+        // Backend action to create Roles
         public async Task<IActionResult> CreateRoles()
         {
             if (!await _roleManager.RoleExistsAsync("Super Administrator"))
@@ -173,7 +183,7 @@ namespace GMS.ASPNet.Core.Controllers
             return View();
         }
 
-
+        // Set a user's roles
         public async Task<bool> SetRoles(AppUser user, UserViewModel model)
         {
             if (model.IsTeacher)
@@ -190,6 +200,7 @@ namespace GMS.ASPNet.Core.Controllers
         }
 
 
+        // Update user object using values from the viewmodel
         public void UpdateValues(AppUser user, UserViewModel model)
         {
             user.UserName = model.UserName;
@@ -202,6 +213,8 @@ namespace GMS.ASPNet.Core.Controllers
             user.PhoneNumber = model.PhoneNumber;
         }
 
+
+        // Reads a User's roles
         public async Task<bool> GetRoles(AppUser user, UserViewModel model)
         {
             model.IsTeacher = await _userManager.IsInRoleAsync(user, "Teacher");
@@ -209,6 +222,7 @@ namespace GMS.ASPNet.Core.Controllers
             return true;
         }
 
+        // Helper method to read a full user
         private async Task<AppUser> GetFullUser(string id)
         {
             var user = await _dataContext.Users.Include(u => u.Instruments)
