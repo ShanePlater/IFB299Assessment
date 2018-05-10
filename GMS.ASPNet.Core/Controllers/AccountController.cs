@@ -128,6 +128,7 @@ namespace GMS.ASPNet.Core.Controllers
             if (!ModelState.IsValid)
                 return View(userVm);
 
+            // Perform database update
             UpdateValues(user, model);
             await SetRoles(user, model);
             await _userManager.UpdateAsync(user);
