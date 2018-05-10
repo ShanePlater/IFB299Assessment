@@ -1,4 +1,17 @@
-﻿/*NAV BAR*/
+﻿
+html, body {
+    height: 100%;
+}
+
+body {
+    font: 11px "Times New Roman", Times, serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-top: 4.5rem;
+    min-height: 100vh;
+}
+
+/*NAV BAR*/
 .flex-rw {
     display: flex;
     flex-flow: row wrap
@@ -32,10 +45,6 @@ bottom: 0;
 #footer ul li {
     list-style: none;
 }
-
-/*$primary-light-blue: #8DB9ED; $primary-line-color: #ccc; * {
-    box-sizing: border-box
-}*/
 
 .generic-anchor {
     color: white;
@@ -90,24 +99,6 @@ bottom: 0;
 }
 /* end of footer */
 
-/*body etc.*/
-html, body {
-    height: 100%
-}
-
-body {
-    font: 11px "Times New Roman", Times, serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    margin: auto;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-between;
-    padding-top: 50px;
-    padding-bottom: 0px;
-    background-color: #EBEAE7;
-    min-width:800px;
-}
 
 main {
     flex: 1 1 auto;
@@ -212,18 +203,22 @@ main {
 
 }
 
-
-
 /* Home Page */
-
+.section {
+    min-height: 100vh;
+    align-items:center;
+}
 
 .home-header {
     text-align: center;
     color: white;
-    padding-top: 15%;
-    padding-bottom: 15%;
+
 }
 
+
+.ta-c{
+    text-align:center;
+}
 
 .title {
     font-size: 8em;
@@ -239,21 +234,16 @@ main {
 #home-blurb {
     height: auto;
     background-color: white;
-    padding-top: 10%;
-    padding-bottom: 10%;
-    padding-left: 20%;
-    padding-right: 20%;
+    
 }
 
     #home-blurb h2 {
-        font-size: 10em;
+        font-size: 8em;
         text-align: left;
     }
 
     #home-blurb p {
         font-size: 2em;
-        padding-right: 20%;
-        padding-top: 5%;
         line-height: 2;
         text-align: left;
     }
@@ -261,16 +251,11 @@ main {
 #home-services {
     height: auto;
     background-color: rgba(150, 150, 150, 0.3);
-    padding-top: 5%;
-    padding-bottom: 10%;
-    padding-left: 20%;
-    padding-right: 20%;
     color: white;
 }
 
     #home-services h2 {
         font-size: 10em;
-        text-align: left;
     }
 
 .services-h4 {
@@ -283,9 +268,8 @@ main {
 
 .services-p {
     font-size: 1.5em;
+    font-weight:300;
     text-align: justify;
-    max-width: 75%;
-    text-shadow: 1px 1px 1px #000000;
 }
 
 

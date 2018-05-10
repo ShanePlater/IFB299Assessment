@@ -1,24 +1,4 @@
 ﻿@{
-    ViewData["Title"] = "Admin Home Page";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<div class="container">
-    <h2>Admin Controls</h2>
-    <div class="row">
-        <div class="col-xs-6 col-md-4">
-            <div class="list-group">
-                <div class="list-group-item">
-                    <a asp-action="UserList" asp-controller="Admin">View Users</a>
-                </div>
-                <div class="list-group-item">
-                    <a asp-action="Index" asp-controller="Admin">View invoices - TBA</a>
-                </div>
-                <div class="list-group-item">
-                    <a asp-action="Index" asp-controller="Admin">View Marketplace - TBA</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-8">
-            Content
-        </div>
-    </div>
-</div>
+
