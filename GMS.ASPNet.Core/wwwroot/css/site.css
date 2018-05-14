@@ -37,7 +37,7 @@ padding-right:15%;
 background-color:black;
 height:auto;
 padding-top:2%;
-padding-bottom:7%;
+padding-bottom:2%;
 position: relative;
 bottom: 0;
 }
@@ -154,7 +154,7 @@ main {
         color: white;
     }
 
-     /* HOME PAGE*/
+  
 
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
