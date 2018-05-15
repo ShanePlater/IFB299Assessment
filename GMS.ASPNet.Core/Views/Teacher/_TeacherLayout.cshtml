@@ -1,0 +1,53 @@
+﻿@using GMS.Data.Models @using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Portal - Mika's Music School</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/favicon.ico" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/teacher.css" />
+    @RenderSection("Css", required: false)
+</head>
+<body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">Generic Music School</a>
+        <input class="form-control form-control-dark w-100" placeholder="Search" aria-label="Search" type="text">
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar collapse" id="sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Teacher">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Teacher/Lessons">Lessons</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Teacher/Billing">Billing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Teacher/Lessons">Account</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"></a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

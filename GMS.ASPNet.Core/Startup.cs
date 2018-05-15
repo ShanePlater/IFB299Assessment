@@ -108,10 +108,10 @@ namespace GMS.ASPNet.Core
             // Specifies the default page to be displayed. i.e. Home page
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "admin-users",
-                    template: "Admin/Users/List",
-                    defaults: new {controller = "Admin", action = "List"});
+                //routes.MapRoute(
+                //    name: "admin-users",
+                //    template: "Admin/Users/List",
+                //    defaults: new {controller = "Admin", action = "List"});
 
                 routes.MapRoute(
                     name: "default",

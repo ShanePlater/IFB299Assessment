@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 namespace GMS.ASPNet.Core.Controllers
 {
     /// <summary>
-    /// AccountController handles all actions to performed on users exluding session management such as login, logout
+    /// AccountController handles all actions performed on users exluding session management such as login, logout
     /// All GMS related actions such as assigning student/teacher/admin priviledges are handled here
     /// </summary>
     [Authorize]
@@ -213,7 +213,6 @@ namespace GMS.ASPNet.Core.Controllers
             user.Address = model.Address;
             user.PhoneNumber = model.PhoneNumber;
         }
-
 
         // Reads a User's roles
         public async Task<bool> GetRoles(AppUser user, UserViewModel model)
