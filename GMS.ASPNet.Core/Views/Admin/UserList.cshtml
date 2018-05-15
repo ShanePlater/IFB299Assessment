@@ -3,68 +3,80 @@
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+@section css{
+    <link href="~/css/userlist.css" rel="stylesheet" type="text/css" />
+}
 
 <h2>@ViewData["Title"]</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(m => m.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(m => m.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(m => m.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(m => m.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(m => m.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(m => m.IsTeacher)
-            </th>
-            <th>
-                @Html.DisplayNameFor(m => m.IsAdmin)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(mItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(mItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(mItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(mItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(mItem => item.PhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(mItem => item.IsTeacher)
-                </td>
-                <td>
-                    @Html.DisplayFor(mItem => item.IsAdmin)
-                </td>
-                <td>
-                    <a asp-action="EditUser" asp-route-id="@item.Id" asp-route-returnUrl="@ViewData["returnUrl"]">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+<row>
+    <div class="container">
+        <h1> All Users</h1>
+        <p>
+            Find by name: @Html.TextBox("SearchString")
+            <input type="submit" value="Search" />
+        </p>
+        <p>
+            @Html.ActionLink("Create New User", "Create")
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="uth">
+                        @Html.DisplayNameFor(m => m.FirstName)
+                    </th>
+                    <th class="uth">
+                        @Html.DisplayNameFor(m => m.LastName)
+                    </th>
+                    <th class="uth">
+                        @Html.DisplayNameFor(m => m.UserName)
+                    </th>
+                    <th class="uth">
+                        @Html.DisplayNameFor(m => m.Email)
+                    </th>
+                    <th class="uth">
+                        @Html.DisplayNameFor(m => m.PhoneNumber)
+                    </th>
+                    <th class="uth">
+                        @Html.DisplayNameFor(m => m.IsTeacher)
+                    </th>
+                    <th class="uth">
+                        @Html.DisplayNameFor(m => m.IsAdmin)
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="utd">
+                @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="utd">
+                        @Html.DisplayFor(mItem => item.FirstName)
+                    </td>
+                    <td class="utd">
+                        @Html.DisplayFor(mItem => item.LastName)
+                    </td>
+                    <td class="utd">
+                        @Html.DisplayFor(mItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(mItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(mItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(mItem => item.IsTeacher)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(mItem => item.IsAdmin)
+                    </td>
+                    <td>
+                        <a asp-action="EditUser" asp-route-id="@item.Id" asp-route-returnUrl="@ViewData["returnUrl"]">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
         }
-    </tbody>
-</table>
+            </tbody>
+        </table>
+    </div>
+</row>

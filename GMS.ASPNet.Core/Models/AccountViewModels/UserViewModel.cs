@@ -52,7 +52,7 @@ namespace GMS.ASPNet.Core.Models.AccountViewModels
             set => User.LastName = value;
         }
 
-        [Display(Name = "UserName")]
+        [Display(Name = "Email")]
         public string Email
         {
             get => User.Email;

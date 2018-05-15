@@ -36,6 +36,14 @@ namespace GMS.ASPNet.Core.Controllers
             return View();
         }
 
+        public IActionResult Reports()
+        {
+            return View();
+        }
+        public IActionResult Billing()
+        {
+            return View();
+        }
         [Route("/Admin/Users")]
         public async Task<IActionResult> UserList()
         {

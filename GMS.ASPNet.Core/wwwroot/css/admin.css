@@ -28,3 +28,15 @@
     overflow-y: auto;
     transition: 0.5s;
 }
+
+a, input {
+    font-family: "Arial", Gadget, sans-serif;
+}
+
+.adminli {
+    font-size:1em;
+}
+
+.margtopdel {
+    margin-top: -15px;
+}

@@ -1,0 +1,34 @@
+﻿
+
+a, p, input {
+    font-family: "Arial", Gadget, sans-serif;
+    font-size:1.15em;
+}
+
+p, h1 {
+    color: black;
+}
+
+h1 {
+    font-family: "Arial", Gadget, sans-serif;
+}
+
+.adminli {
+    font-size: 1.25em;
+}
+
+.margtopdel {
+    margin-top: -15px;
+}
+
+.uth {
+    color: blue;
+    font-family: "Arial", Gadget, sans-serif;
+    font-size:1.25em;
+}
+
+.utd {
+    color: black;
+    font-family: "Arial", Gadget, sans-serif;
+    font-size: 1.15em;
+}
