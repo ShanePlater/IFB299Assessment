@@ -7,3 +7,7 @@
     background-size: cover;
     background-color: black;
 }
+
+.g-recaptcha {
+    padding: 10px;
+}

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<GMS.ASPNet.Core.Models.AccountViewModels.UserViewModel>
 
 @{
-    ViewData["Title"] = "View Users";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -38,33 +38,33 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(mItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(mItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(mItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(mItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(mItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(mItem => item.IsTeacher)
-            </td>
-            <td>
-                @Html.DisplayFor(mItem => item.IsAdmin)
-            </td>
-            <td>
-                <a asp-action="EditUser" asp-route-id="@item.Id" asp-route-returnUrl="@ViewData["returnUrl"]">Edit</a>
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(mItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(mItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(mItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(mItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(mItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(mItem => item.IsTeacher)
+                </td>
+                <td>
+                    @Html.DisplayFor(mItem => item.IsAdmin)
+                </td>
+                <td>
+                    <a asp-action="EditUser" asp-route-id="@item.Id" asp-route-returnUrl="@ViewData["returnUrl"]">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>

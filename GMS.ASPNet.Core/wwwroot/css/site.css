@@ -29,17 +29,20 @@ body {
     font-family: "Arial", Gadget, sans-serif;
 }
 
+.nav-item{
+    font-size: 12px;
+}
 /* footer */
-#footer{
-width:100%;
-padding-left:25%;
-padding-right:15%;
-background-color:black;
-height:auto;
-padding-top:2%;
-padding-bottom:2%;
-position: relative;
-bottom: 0;
+#footer {
+    width: 100%;
+    padding-left: 25%;
+    padding-right: 15%;
+    background-color: black;
+    height: auto;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    position: relative;
+    bottom: 0;
 }
 
 #footer ul li {
@@ -63,12 +66,14 @@ bottom: 0;
 .footer-list-header {
     padding: 5px 0 5px 0;
     color: #fff;
-    font: 16px "Times New Roman", Times, serif
+    font:"Times New Roman", Times, serif;
+    font-size:1.5em;
 }
 
 .footer-list-anchor {
-    font: 12px "Times New Roman", Times, serif;
+    font: "Times New Roman", Times, serif;
     text-align: left;
+    font-size:1.25em;
 
 }
 #lab_social_icon_footer {
@@ -175,7 +180,7 @@ main {
     }
 }
 
-/* REGISTER PAGE */
+
 
 /* About Page */
 .about-body{
@@ -426,7 +431,7 @@ main {
     }
 
 
-    /* Register */
+/* REGISTER PAGE */
 
 
 #reg-title {
@@ -462,17 +467,21 @@ main {
             display: none;
         }
 
-    /*inputs*/
-    #msform input, #msform textarea {
-        padding: 15px;
-        border: 1px solid #ccc;
-        border-radius: 0px;
-        margin-bottom: 10px;
-        width: 100%;
-        box-sizing: border-box;
-        color: #2C3E50;
-        font-size: 13px;
-    }
+
+
+
+/*inputs*/
+#msform input, #msform textarea {
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    color: #2C3E50;
+    font-size: 13px;
+}
+
 
 
 /*headings*/
@@ -490,4 +499,9 @@ main {
     font-size: 13px;
     color: white;
     margin-bottom: 20px;
+}
+
+/* gotta CAPTHA them all */
+.g-recaptcha{
+    padding-left:25%;
 }
